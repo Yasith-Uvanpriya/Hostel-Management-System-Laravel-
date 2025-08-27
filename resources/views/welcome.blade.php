@@ -13,7 +13,10 @@
         <h1>Welcome to the Hostel Management System</h1>
         <p>This is a simple Laravel application for managing hostel operations.</p>
         </div>
-    </div>
+        <div class="text-center">
+            <a href="{{ url('/register') }}" class="btn btn-primary m-2">Register</a>
+            <a href="{{ url('/login') }}" class="btn btn-secondary m-2">Login</a>
+        </div>
 
 </body>
 </html>
