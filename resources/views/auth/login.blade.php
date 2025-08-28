@@ -9,12 +9,17 @@
 </head>
 <body>
     <div class="container">
-        <div class="text-center">
+        <div class="text-center" style="margin:175px auto;">
             <form method="POST" action="{{ url('/login') }}">
     @csrf
-    <input type="email" name="email" placeholder="Email">
-    <input type="password" name="password" placeholder="Password">
-    <button type="submit">Login</button>
+     <div class="mb-3" style="width:400px; margin:0 auto;">
+    <label for="email" class="form-label">Email address</label>
+    <input type="email" name="email" placeholder="Email" class="form-control">
+</div>
+<div class="mb-3" style="width:400px; margin:0 auto;">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" name="password" placeholder="Password" class="form-control">
+    <button type="submit" class="btn btn-primary">Login</button>
 </form>
 
         </div>

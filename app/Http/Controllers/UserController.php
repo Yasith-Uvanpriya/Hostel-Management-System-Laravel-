@@ -17,9 +17,16 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users',
+             'email' => [
+            'required',
+            'email',
+            'unique:users',
+            'regex:/^[\w\.-]+@std\.foc\.sab\.ac\.lk$/'
+        ],
             'password' => 'required|min:6',
-        ]);
+        ],[
+        'email.regex' => 'Only university emails ending with @std.foc.sab.ac.lk are allowed.',
+    ]);
 
         User::create([
             'name' => $request->name,
@@ -40,7 +47,7 @@ public function login(Request $request)
     $credentials = $request->only('email', 'password');
 
     if (Auth::attempt($credentials)) {
-        return redirect()->intended('/');
+        return redirect()->intended('/S_interface');
     }
 
     return redirect('/login')->with('error', 'Invalid credentials. Please try again.');
