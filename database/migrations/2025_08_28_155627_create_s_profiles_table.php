@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('sprofiles', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id'); // foreign key
+            $table->unsignedBigString('user_id'); // foreign key
             $table->integer('Index_no');
             $table->string('Faculty');
         $table->string('Department');
