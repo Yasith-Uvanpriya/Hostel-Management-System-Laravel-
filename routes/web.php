@@ -9,9 +9,6 @@ Route::get('/', function () {
 Route::get('/S_interface', function(){
     return view('S_interface');
 });
-Route::get('/profile', function(){
-    return view('Profile');
-});
 
 
 Route::get('/register', [UserController::class, 'showRegistrationForm']);
