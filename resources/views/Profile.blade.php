@@ -9,19 +9,19 @@
 <body>
     <div class="container mt-5">
         <div class="text-center" style="width: 400px; margin: 0 auto;">
-            <form method="POST" action="{{ url('/profile') }}">
+            <form method="POST" action="/update">
                 @csrf
 
                 <!-- Index No -->
                 <div class="mb-3">
-                    <label class="form-label" for="index_no">Index No</label>
-                    <input type="text" class="form-control" id="index_no" name="index_no" >
+                    <label class="form-label" for="Index_no">Index No</label>
+                    <input type="text" class="form-control" id="Index_no" name="Index_no" >
                 </div>
 
                 <!-- Faculty -->
                 <div class="mb-3">
-                    <label class="form-label" for="faculty">Faculty</label>
-                    <select class="form-select" name="faculty" id="faculty">
+                    <label class="form-label" for="Faculty">Faculty</label>
+                    <select class="form-select" name="Faculty" id="Faculty">
                         <option selected disabled>-- Select Faculty --</option>
                         <option value="Computing">Computing</option>
                         <option value="Management">Management</option>
@@ -31,22 +31,22 @@
 
                 <!-- Department -->
                 <div class="mb-3">
-                    <label class="form-label" for="department">Department</label>
-                    <select class="form-select" name="department" id="department">
+                    <label class="form-label" for="Department">Department</label>
+                    <select class="form-select" name="Department" id="Department">
                         <option selected disabled>-- Select Department --</option>
                     </select>
                 </div>
 
                 <!-- Address -->
                 <div class="mb-3">
-                    <label class="form-label" for="address">Address</label>
-                    <input type="text" class="form-control" id="address" name="address" >
+                    <label class="form-label" for="Address">Address</label>
+                    <input type="text" class="form-control" id="Address" name="Address" >
                 </div>
 
                 <!-- Blood Type -->
                 <div class="mb-3">
-                    <label class="form-label" for="blood_type">Blood Type</label>
-                    <select class="form-select" name="blood_type" id="blood_type">
+                    <label class="form-label" for="Blood_Group">Blood Type</label>
+                    <select class="form-select" name="Blood_Group" id="Blood_Group">
                         <option selected disabled>-- Select Blood Type --</option>
                         <option value="A+">A+</option>
                         <option value="B+">B+</option>
@@ -57,14 +57,14 @@
 
                 <!-- Medical Condition -->
                 <div class="mb-3">
-                    <label for="medical" class="form-label">Medical Condition</label>
-                    <textarea class="form-control" id="medical" name="medical" rows="3"></textarea>
+                    <label for="Medical_Condition" class="form-label">Medical Condition</label>
+                    <textarea class="form-control" id="Medical_Condition" name="Medical_Condition" rows="3"></textarea>
                 </div>
 
                 <!-- Telephone -->
                 <div class="mb-3">
-                    <label class="form-label" for="telephone">Telephone</label>
-                    <input type="text" class="form-control" id="telephone" name="telephone" >
+                    <label class="form-label" for="Telephone">Telephone</label>
+                    <input type="text" class="form-control" id="Telephone" name="Telephone" >
                 </div>
 
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -74,28 +74,32 @@
 
     <!-- JS for dynamic department selection -->
     <script>
-        const facultySelect = document.getElementById('faculty');
-        const departmentSelect = document.getElementById('department');
+        // Use IDs exactly as in the HTML (case-sensitive)
+        const facultySelect = document.getElementById('Faculty');
+        const departmentSelect = document.getElementById('Department');
 
-        const departments = {
-            "Computing": ["Software Engineering", "Cyber Security", "Data Science"],
-            "Management": ["Accounting", "Business Admin", "HR Management"],
-            "Applied Science": ["Biology", "Physics", "Chemistry"]
-        };
+        // Guard in case elements are missing
+        if (facultySelect && departmentSelect) {
+            const departments = {
+                "Computing": ["Software Engineering", "Cyber Security", "Data Science"],
+                "Management": ["Accounting", "Business Admin", "HR Management"],
+                "Applied Science": ["Biology", "Physics", "Chemistry"]
+            };
 
-        facultySelect.addEventListener('change', function () {
-            const selectedFaculty = this.value;
-            departmentSelect.innerHTML = '<option selected disabled>-- Select Department --</option>';
+            facultySelect.addEventListener('change', function () {
+                const selectedFaculty = this.value;
+                departmentSelect.innerHTML = '<option selected disabled>-- Select Department --</option>';
 
-            if (departments[selectedFaculty]) {
-                departments[selectedFaculty].forEach(dep => {
-                    const option = document.createElement('option');
-                    option.value = dep;
-                    option.textContent = dep;
-                    departmentSelect.appendChild(option);
-                });
-            }
-        });
+                if (departments[selectedFaculty]) {
+                    departments[selectedFaculty].forEach(dep => {
+                        const option = document.createElement('option');
+                        option.value = dep;
+                        option.textContent = dep;
+                        departmentSelect.appendChild(option);
+                    });
+                }
+            });
+        }
     </script>
 </body>
 </html>
