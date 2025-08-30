@@ -8,7 +8,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/S_interface', function(){
-    return view('S_interface');
+    $user = auth()->user();
+    $sProfile = null;
+    if ($user) {
+        $sProfile = \App\Models\S_profile::where('user_id', $user->id)->first();
+    }
+
+    return view('S_interface', compact('sProfile', 'user'));
 });
 Route::get('/profile/{id}', function($id){
     $user = \App\Models\User::find($id);

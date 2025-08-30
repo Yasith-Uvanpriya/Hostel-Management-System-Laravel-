@@ -45,7 +45,7 @@
                 <!-- Address -->
                 <div class="mb-3">
                     <label class="form-label" for="Address">Address</label>
-                    <input type="text" class="form-control" id="Address" name="Address" >
+                    <input type="text" class="form-control" id="Address" name="Address"  >
                 </div>
 
                 <!-- Blood Type -->
