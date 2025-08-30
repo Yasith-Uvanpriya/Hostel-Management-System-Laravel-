@@ -24,7 +24,6 @@ class SProfileController extends Controller
             ['user_id' => auth()->id()], // Assuming you have user authentication
             [
                 'Index_no' => $request->Index_no,
-                'Name' => auth()->user()->name,
                 'Faculty' => $request->Faculty,
                 'Department' => $request->Department,
                 'Address' => $request->Address,

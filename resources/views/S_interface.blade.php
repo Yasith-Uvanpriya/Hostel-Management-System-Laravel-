@@ -12,6 +12,7 @@
         <h1 class="text-center">Student Interface</h1>
         <div class="text-center">
             <h1> Hi I am {{ Auth::user()->name }}</h1>
+            <a href="{{ url('/profile/' . Auth::user()->id) }}" class="btn btn-primary">Profile</a>
         </div>
     </div>
 </body>

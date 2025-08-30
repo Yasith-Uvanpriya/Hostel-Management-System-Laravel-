@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id'); // foreign key
             $table->integer('Index_no');
-            $table->string('Name');
             $table->string('Faculty');
         $table->string('Department');
         $table->string('Address');
