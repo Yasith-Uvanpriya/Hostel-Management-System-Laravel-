@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('sprofiles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id'); // foreign key
-            $table->integer('Index_no');
+            $table->string('Index_no');
+            $table->string('name');
             $table->string('Faculty');
         $table->string('Department');
         $table->string('Address');
@@ -33,6 +34,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('s_profiles');
+    // drop the same table name created in up()
+    Schema::dropIfExists('sprofiles');
     }
 };

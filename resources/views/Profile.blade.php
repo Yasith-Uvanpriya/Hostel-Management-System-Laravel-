@@ -14,8 +14,13 @@
 
                 <!-- Index No -->
                 <div class="mb-3">
-                    <label class="form-label" for="Index_no">Index No</label>
+                    <label class="form-label" for="Index_no" >Index No</label>
                     <input type="text" class="form-control" id="Index_no" name="Index_no" >
+                </div>
+                <!-- Name -->
+                <div class="mb-3">
+                    <label class="form-label" for="name">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" >
                 </div>
 
                 <!-- Faculty -->

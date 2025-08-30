@@ -3,17 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory; 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class S_profile extends Model
 {
-       use HasFactory;
+    use HasFactory;
 
-    protected $table = 'sprofiles'; // 👈 force Laravel to use this table
+    // explicit table name to match migration
+    protected $table = 'sprofiles';
 
     protected $fillable = [
         'user_id',
         'Index_no',
+        'name',
         'Faculty',
         'Department',
         'Address',

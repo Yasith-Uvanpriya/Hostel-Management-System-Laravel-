@@ -22,7 +22,7 @@ Route::get('/profile', function () {
     }
 
     $user = auth()->user();
-    return view('Profile', compact('user'));
+    return view('S_interface', compact('user'));
 });
 Route::post('/update', [SProfileController::class, 'update'])->name('update');
 Route::get('/register', [UserController::class, 'showRegistrationForm']);

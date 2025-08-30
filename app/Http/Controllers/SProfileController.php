@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 use App\Models\S_profile;
 
 use Illuminate\Http\Request;
-use App\Models\SProfile;
+// use App\Models\SProfile; // Removed duplicate import
 
 class SProfileController extends Controller
 {
     public function update(Request $request)
     {
         $request->validate([
-            'Index_no' => 'required|integer',
+            // allow Index_no to be string (IDs can have leading zeros)
+            'Index_no' => 'required|string|max:50',
             'Faculty' => 'required|string|max:255',
             'Department' => 'required|string|max:255',
             'Address' => 'required|string|max:255',
@@ -22,8 +23,9 @@ class SProfileController extends Controller
 
         $sProfile = S_profile::updateOrCreate(
             ['user_id' => auth()->id()], // Assuming you have user authentication
-            [
+            [   
                 'Index_no' => $request->Index_no,
+                'name' => $request->name ?? auth()->user()->name ?? null, // Set name from auth if missing
                 'Faculty' => $request->Faculty,
                 'Department' => $request->Department,
                 'Address' => $request->Address,
@@ -37,6 +39,6 @@ class SProfileController extends Controller
         $sProfile->save();
         $data = S_profile::all();
 
-        return redirect('/profile')->with('success', 'Profile updated successfully!');
+        return redirect('/S_interface')->with('success', 'Profile updated successfully!');
     }
 }

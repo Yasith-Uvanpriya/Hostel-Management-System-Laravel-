@@ -9,10 +9,24 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="text-center">Student Interface</h1>
+        <h1 class="text-center">Hi Wellcome {{ Auth::user()->name }}</h1>
         <div class="text-center">
-            <h1> Hi I am {{ Auth::user()->name }}</h1>
-            <a href="{{ url('/profile/' . Auth::user()->id) }}" class="btn btn-primary">Profile</a>
+            <ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="#">Profile</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+  </li>
+</ul>
+            
+            <a href="{{ url('/profile/' . Auth::user()->id) }}" class="btn btn-primary">Edit profile</a>
         </div>
     </div>
 </body>
