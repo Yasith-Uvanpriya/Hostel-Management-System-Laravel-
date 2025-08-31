@@ -8,24 +8,14 @@
 
 </head>
 <body>
+ 
     <div class="container">
         <h1 class="text-center">Hi Wellcome {{ Auth::user()->name }}</h1>
-        <div class="text-center">
-            <ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">Profile</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-  </li>
-</ul>
-        </div>
+     
+         @include('Nav bar.navbar')
+
+            
+           <div class="text-center">
 
     <div>
       <div class="card-body p-4" style="background-color:#f8f9fa; width: 600px; margin: 0 ; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">

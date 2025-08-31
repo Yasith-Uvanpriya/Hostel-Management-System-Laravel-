@@ -16,6 +16,9 @@ Route::get('/S_interface', function(){
 
     return view('S_interface', compact('sProfile', 'user'));
 });
+Route::get('/test', function () {
+    return view('admin.a_interface');
+});
 Route::get('/profile/{id}', function($id){
     $user = \App\Models\User::find($id);
     return view('Profile', compact('user'));
