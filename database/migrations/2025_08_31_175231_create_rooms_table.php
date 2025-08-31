@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
+            $table->string('hostel_name');
+            $table->string('room_number');
+            $table->integer('bed_number');
+            $table->string('locker_number');
             $table->timestamps();
         });
     }
