@@ -16,6 +16,9 @@ Route::get('/S_interface', function(){
 
     return view('S_interface', compact('sProfile', 'user'));
 });
+
+// Admin dashboard route
+Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'dashboard'])->name('admin.dashboard');
 Route::get('/test', function () {
     return view('admin.a_interface');
 });
