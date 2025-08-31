@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SProfileController;
+use App\Http\Controllers\RoomController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -16,6 +17,11 @@ Route::get('/S_interface', function(){
 
     return view('S_interface', compact('sProfile', 'user'));
 });
+Route::get('/a_room', function(){
+return view('admin.a_room');
+});
+
+Route::get('/room', [RoomController::class, 'add']);
 
 // Admin dashboard route
 Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'dashboard'])->name('admin.dashboard');

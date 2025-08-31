@@ -10,10 +10,10 @@
         
     <ul class="nav nav-tabs">
   <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">Profile</a>
+    <a class="nav-link active" aria-current="page" href="/S_interface">Profile</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
+    <a class="nav-link" href="/room">Room</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="#">Link</a>
