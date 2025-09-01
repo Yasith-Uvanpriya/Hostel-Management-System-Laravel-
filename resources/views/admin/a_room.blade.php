@@ -70,3 +70,30 @@
                 });
             });
         </script>
+        <script>
+            // store admin-added rooms into localStorage so user page can read them
+            (function(){
+                var form = document.querySelector('form[action="/add_room"]');
+                if(!form) return;
+                form.addEventListener('submit', function(){
+                    try{
+                        var hostel = document.getElementById('hostel_name') ? document.getElementById('hostel_name').value.trim() : '';
+                        var room = document.getElementById('room_number') ? document.getElementById('room_number').value.trim() : '';
+                        var bed = document.getElementById('bed_number') ? document.getElementById('bed_number').value.trim() : '';
+                        var locker = document.getElementById('locker_number') ? document.getElementById('locker_number').value.trim() : '';
+                        if(!hostel || !room) return; // require basic data
+                        var stored = JSON.parse(localStorage.getItem('rooms') || '[]');
+                        // avoid duplicates by matching hostel + room
+                        var exists = stored.find(function(r){ return r.hostel_name === hostel && r.room_number === room; });
+                        if(!exists){
+                            stored.push({hostel_name: hostel, room_number: room, bed_number: bed || 0, locker_number: locker || 0});
+                            localStorage.setItem('rooms', JSON.stringify(stored));
+                        }
+                    }catch(e){
+                        // silently ignore localStorage issues
+                        console.warn('rooms save failed', e);
+                    }
+                    // allow normal form submission to proceed
+                });
+            })();
+        </script>

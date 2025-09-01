@@ -85,6 +85,51 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function(){
+            // load admin-added rooms from localStorage and inject into dropdowns
+            try{
+                var stored = JSON.parse(localStorage.getItem('rooms') || '[]');
+                if(Array.isArray(stored) && stored.length){
+                    var hostelMenu = document.querySelector('#hostelDropdownToggle + .dropdown-menu') || document.querySelector('.dropdown-menu[aria-labelledby="hostelDropdownToggle"]');
+                    var roomMenu = document.querySelector('#roomDropdownToggle + .dropdown-menu') || document.querySelector('.dropdown-menu[aria-labelledby="roomDropdownToggle"]');
+                    // helper to check existing values
+                    function existsInMenu(menu, value, attr){
+                        if(!menu) return false;
+                        var items = menu.querySelectorAll('.dropdown-item');
+                        for(var i=0;i<items.length;i++){
+                            if((attr === 'text' && items[i].textContent.trim() === value) || (attr === 'data' && items[i].getAttribute('data-value') === value)) return true;
+                        }
+                        return false;
+                    }
+
+                    stored.forEach(function(r){
+                        if(!r || !r.hostel_name) return;
+                        // add hostel if missing
+                        if(hostelMenu && !existsInMenu(hostelMenu, r.hostel_name, 'data')){
+                            var li = document.createElement('li');
+                            li.innerHTML = '<a class="dropdown-item hostel-item" href="#" data-value="'+r.hostel_name+'">'+r.hostel_name+'</a>';
+                            hostelMenu.appendChild(li);
+                        }
+                        // add room if missing
+                        if(roomMenu && !existsInMenu(roomMenu, r.room_number, 'data')){
+                            var li2 = document.createElement('li');
+                            var a = document.createElement('a');
+                            a.className = 'dropdown-item room-item';
+                            a.href = '#';
+                            a.setAttribute('data-value', r.room_number);
+                            a.setAttribute('data-hostel', r.hostel_name);
+                            a.setAttribute('data-bed', String(r.bed_number || ''));
+                            a.setAttribute('data-locker', String(r.locker_number || ''));
+                            a.textContent = r.room_number + ' (' + r.hostel_name + ')';
+                            li2.appendChild(a);
+                            roomMenu.appendChild(li2);
+                        }
+                    });
+                }
+            }catch(e){
+                // ignore storage errors
+                console.warn('load rooms failed', e);
+            }
+
             // hostel dropdown
             var hostelHidden = document.getElementById('hostelName');
             var hostelLabel = document.getElementById('hostelToggleLabel');
