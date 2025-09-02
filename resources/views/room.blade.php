@@ -26,7 +26,7 @@
                         <li><a class="dropdown-item hostel-item" href="#" data-value="Hostel C">Hostel C</a></li>
                     </ul>
                 </div>
-                <input type="hidden" id="hostelName" name="hostelName" value="{{ old('hostelName') }}" required>
+                <input type="hidden" id="hostelName" name="hostel_name" value="{{ old('hostelName') }}" required>
             </div>
 
             <div class="mb-3">
@@ -41,7 +41,7 @@
                         <li><a class="dropdown-item room-item" href="#" data-value="Room 201">Room 201</a></li>
                     </ul>
                 </div>
-                <input type="hidden" id="roomNumber" name="roomNumber" value="{{ old('roomNumber') }}" required>
+                <input type="hidden" id="roomNumber" name="room_number" value="{{ old('roomNumber') }}" required>
             </div>
 
             <div class="mb-3">
@@ -57,7 +57,7 @@
                         <li><a class="dropdown-item bed-item" href="#" data-value="4">4</a></li>
                     </ul>
                 </div>
-                <input type="hidden" id="bedCount" name="bedCount" value="{{ old('bedCount') }}" required>
+                <input type="hidden" id="bedCount" name="bed_number" value="{{ old('bedCount') }}" required>
             </div>
 
             <div class="mb-3">
@@ -73,7 +73,7 @@
                         <li><a class="dropdown-item locker-item" href="#" data-value="4">4</a></li>
                     </ul>
                 </div>
-                <input type="hidden" id="lockerCount" name="lockerCount" value="{{ old('lockerCount') }}" required>
+                <input type="hidden" id="lockerCount" name="locker_number" value="{{ old('lockerCount') }}" required>
                 <div class="form-text">Locker defaults to selected bed count but can be changed.</div>
             </div>
             <button type="submit" class="btn btn-primary">Add Room</button>

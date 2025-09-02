@@ -42,6 +42,7 @@ Route::get('/profile', function () {
     $user = auth()->user();
     return view('S_interface', compact('user'));
 });
+Route::post('/aroom', [RoomController::class, 'addRoom']);
 Route::Post('/add-room', [RoomController::class, 'store'])->name('add.room');
 Route::post('/update', [SProfileController::class, 'update'])->name('update');
 Route::get('/register', [UserController::class, 'showRegistrationForm']);
