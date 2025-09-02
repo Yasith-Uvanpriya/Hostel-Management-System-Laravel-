@@ -12,7 +12,7 @@
         <div class="text-center" style="width: 400px; margin: 0 auto;">
         <h1> Add Room Details</h1>
 
-        <form action="" method="POST">
+        <form action="/add-room" method="POST">
             @csrf
             <div class="mb-3">
                 <label for="hostelName" class="form-label">Which Hostel You currently reside in?</label>
