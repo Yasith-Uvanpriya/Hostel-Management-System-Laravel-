@@ -13,7 +13,7 @@
         </div>
         <div class="container" style="margin-top: 20px; max-width: 800px;">
         <h1>Add Room</h1>
-        <form action="/add_room" method="POST">
+        <form action="/aroom" method="POST">
             @csrf
             <div class="mb-3">
                 <label for="hostel_name" class="form-label">Hostel Name</label>
@@ -73,7 +73,7 @@
         <script>
             // store admin-added rooms into localStorage so user page can read them
             (function(){
-                var form = document.querySelector('form[action="/add_room"]');
+                var form = document.querySelector('form[action="/aroom"]');
                 if(!form) return;
                 form.addEventListener('submit', function(){
                     try{
