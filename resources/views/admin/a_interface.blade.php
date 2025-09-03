@@ -98,7 +98,7 @@
     </div>
     <div class="card mt-4 shadow">
         <div class="card-header">
-          Recent Users
+          View Room
         </div>
         <div class="card-body">
           <table class="table table-striped">
@@ -106,32 +106,32 @@
               <tr>
                 <th>Index_no</th>
                 <th>Name</th>
-                <th>Faculty</th>
-                <th>Department</th>
+                <th>Room NO</th>
+                <th>Hostel</th>
                 <th>Address</th>
-                <th>Blood Group</th>
-                <th>Medical Condition</th>
-                <th>Telephone</th>
+                <th>Locker No</th>
+                <th>entry time DATETIME</th>
+                <th>exit time DATETIME</th>
 
               </tr>
             </thead>
       <tbody>
-        @foreach(\App\Models\S_profile::all() as $user)
+        @foreach(\App\Models\Room::all() as $room)
           <tr>
-            <td>{{ $user->Index_no }}</td>
-            <td>{{ $user->name }}</td>
-            <td>{{ $user->Faculty }}</td>
-            <td>{{ $user->Department }}</td>
-            <td>{{ $user->Address }}</td>
-            <td>{{ $user->Blood_Group }}</td>
-            <td>{{ $user->Medical_Condition }}</td>
-            <td>{{ $user->Telephone }}</td>
+            <td>{{ $room->id }}</td>
+            <td>{{ $room->hostel_name }}</td>
+            <td>{{ $room->room_number }}</td>
+            <td>{{ $room->bed_number }}</td>
+            <td>{{ $room->locker_number }}</td>
+            <td>{{ $room->created_at }}</td>
+            <td>{{ $room->updated_at }}</td>
+
           </tr>
         @endforeach
         
       </tbody>
           </table>
-          <a href="#" class="btn btn-primary">View Room</a>
+          <a href="#" class="btn btn-primary">Recent Users</a>
         </div>
       </div>
   </div>
