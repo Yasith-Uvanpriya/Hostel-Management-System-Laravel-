@@ -116,18 +116,19 @@
               </tr>
             </thead>
       <tbody>
-        @foreach(\App\Models\Room::all() as $room)
-          <tr>
-            <td>{{ $room->id }}</td>
-            <td>{{ $room->hostel_name }}</td>
-            <td>{{ $room->room_number }}</td>
-            <td>{{ $room->bed_number }}</td>
-            <td>{{ $room->locker_number }}</td>
-            <td>{{ $room->created_at }}</td>
-            <td>{{ $room->updated_at }}</td>
+        @foreach(\App\Models\Room::with('user.profile')->get() as $room)
+<tr>
+    <td>{{ $room->user?->profile?->Index_no ?? 'N/A' }}</td>
+    <td>{{ $room->user?->name ?? 'N/A' }}</td>
+    <td>{{ $room->room_number }}</td>
+    <td>{{ $room->hostel_name }}</td>
+    <td>{{ $room->bed_number }}</td>
+    <td>{{ $room->locker_number }}</td>
+    <td>{{ $room->created_at }}</td>
+    <td>{{ $room->updated_at }}</td>
+</tr>
+@endforeach
 
-          </tr>
-        @endforeach
         
       </tbody>
           </table>
