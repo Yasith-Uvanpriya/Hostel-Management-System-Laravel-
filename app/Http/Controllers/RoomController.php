@@ -30,6 +30,7 @@ class RoomController extends Controller
             'room_number' => $request->room_number,
             'bed_number' => $request->bed_number,
             'locker_number' => $request->locker_number,
+            'user_id' => $request->user_id,
         ]);
         
         $data = Room::all();

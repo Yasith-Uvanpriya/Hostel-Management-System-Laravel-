@@ -15,4 +15,9 @@ class Room extends Model
         'bed_number',
         'locker_number',
     ];
+    public function user()
+{
+    return $this->belongsTo(User::class, 'user_id');
+}
+
 }

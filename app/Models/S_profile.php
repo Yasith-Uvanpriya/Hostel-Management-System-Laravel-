@@ -23,4 +23,9 @@ class S_profile extends Model
         'Medical_Condition',
         'Telephone',
     ];
+    public function user()
+{
+    return $this->belongsTo(User::class, 'user_id');
+}
+
 }

@@ -45,4 +45,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function profile()
+{
+    return $this->hasOne(S_profile::class, 'user_id');
+}
+
+public function room()
+{
+    return $this->belongsTo(Room::class, 'room_id'); // only if you add room_id in users table
+}
+
 }
