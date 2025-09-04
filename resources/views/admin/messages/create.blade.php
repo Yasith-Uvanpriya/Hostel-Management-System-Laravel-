@@ -7,9 +7,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="container mt-5">
+    <div class="d-flex" style="display: flex; min-height: 100vh;">
+   <div class="sidebar" style="width: 240px;">
+@include('admin.Dashboard')
+</div>
+<div class="container mt-5" style="margin-left: 240px; margin-top: 350px; ">
+
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-8 mx-auto">
             <div class="card shadow">
                 <div class="card-header bg-primary text-white">
                     <h4 class="mb-0">Send Message to Users</h4>
@@ -59,5 +64,7 @@
         </div>
     </div>
 </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

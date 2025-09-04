@@ -42,9 +42,9 @@
   <!-- Sidebar -->
   <div class="sidebar">
     <h4 class="text-center mb-4">Admin Panel</h4>
-    <a href="/test"><i class="bi bi-house-door"></i> Dashboard</a>
-    <a href="/a_room"><i class="bi bi-people"></i> Add Hostels</a>
-    <a href="#"><i class="bi bi-box"></i> Products</a>
+    <a href="/test"><i class="bi bi-speedometer2"></i> Dashboard</a>
+    <a href="/a_room"><i class="bi bi-building"></i> Add Hostels</a>
+    <a href="/messages/create"><i class="bi bi-envelope-fill"></i> Messages</a>
     <a href="#"><i class="bi bi-gear"></i> Settings</a>
     <a href="#"><i class="bi bi-box-arrow-right"></i> Logout</a>
   </div>
