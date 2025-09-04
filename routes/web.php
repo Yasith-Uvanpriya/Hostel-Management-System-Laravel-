@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SProfileController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\AdminMessageController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -50,3 +51,6 @@ Route::post('/register', [UserController::class, 'register'])->name('register');
 
 Route::get('/login', [UserController::class, 'showLoginForm']);
 Route::post('/login', [UserController::class, 'login'])->name('login');
+
+Route::get('/messages/create', [AdminMessageController::class, 'create'])->name('admin.messages.create');
+Route::post('/messages/store', [AdminMessageController::class, 'store'])->name('admin.messages.store');
