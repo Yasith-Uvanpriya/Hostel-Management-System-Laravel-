@@ -119,7 +119,7 @@
         @foreach(\App\Models\Room::with('user.profile')->get() as $room)
 <tr>
     <td>{{ $room->user?->profile?->Index_no ?? 'N/A' }}</td>
-    <td>{{ $room->user?->name ?? 'N/A' }}</td>
+    <td>{{ $room->user?->profile?->name ?? 'N/A' }}</td>
     <td>{{ $room->room_number }}</td>
     <td>{{ $room->hostel_name }}</td>
     <td>{{ $room->bed_number }}</td>
