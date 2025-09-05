@@ -14,6 +14,7 @@ class Room extends Model
         'room_number',
         'bed_number',
         'locker_number',
+        'user_id',
     ];
     public function user()
 {
