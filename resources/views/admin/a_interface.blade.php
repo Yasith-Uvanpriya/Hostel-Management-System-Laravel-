@@ -108,7 +108,7 @@
                 <th>Name</th>
                 <th>Room NO</th>
                 <th>Hostel</th>
-                <th>Address</th>
+                <th>bed number</th>
                 <th>Locker No</th>
                 <th>entry time DATETIME</th>
                 <th>exit time DATETIME</th>
