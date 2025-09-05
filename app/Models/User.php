@@ -52,7 +52,7 @@ class User extends Authenticatable
 
 public function room()
 {
-    return $this->belongsTo(Room::class, 'room_id'); // only if you add room_id in users table
+    return $this->hasOne(Room::class, 'user_id');
 }
 
 }
