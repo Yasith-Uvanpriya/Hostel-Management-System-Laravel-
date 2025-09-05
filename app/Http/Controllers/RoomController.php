@@ -25,13 +25,14 @@ class RoomController extends Controller
             'locker_number' => 'required|integer|min:0'
         ]);
 
-        Room::create([
+        $room = new Room([
             'hostel_name' => $request->hostel_name,
             'room_number' => $request->room_number,
             'bed_number' => $request->bed_number,
             'locker_number' => $request->locker_number,
-            'user_id' => $request->user_id,
         ]);
+        $room->user_id = auth()->id();
+        $room->save();
         
         $data = Room::all();
 
