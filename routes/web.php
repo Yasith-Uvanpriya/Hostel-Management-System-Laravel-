@@ -25,7 +25,11 @@ return view('admin.a_room');
 Route::get('/room', [RoomController::class, 'add']);
 
 // Admin dashboard route
-Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'dashboard'])->name('admin.dashboard');
+Route::get('/admin/login', [\App\Http\Controllers\AdminController::class, 'showLoginForm'])->name('admin.login');
+Route::post('/admin/login', [\App\Http\Controllers\AdminController::class, 'login'])->name('admin.login.submit');
+Route::middleware(['admin'])->group(function () {
+    Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'dashboard'])->name('admin.dashboard');
+});
 Route::get('/test', function () {
     return view('admin.a_interface');
 });
