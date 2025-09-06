@@ -61,6 +61,35 @@
                     </form>
                 </div>
             </div>
+
+            {{-- Sent Messages --}}
+            <div class="card shadow mt-4">
+                <div class="card-header bg-secondary text-white">
+                    <h4 class="mb-0">Sent Messages</h4>
+                </div>
+                <div class="card-body">
+                    @if($messages->isEmpty())
+                        <p>No messages sent yet.</p>
+                    @else
+                        <ul class="list-group">
+                            @foreach($messages as $message)
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <strong>To: {{ $message->user ? $message->user->name : 'All Users' }}</strong>
+                                        <p>{{ $message->message }}</p>
+                                        <small class="text-muted">Sent: {{ $message->created_at->format('M d, Y h:i A') }}</small>
+                                    </div>
+                                    <form action="{{ route('admin.messages.destroy', $message->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
 </div>

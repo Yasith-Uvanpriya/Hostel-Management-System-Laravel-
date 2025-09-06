@@ -16,7 +16,12 @@
     <a class="nav-link" href="/room">Room</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
+    <a class="nav-link" href="{{ route('user.messages') }}">
+        Messages
+        @if(isset($unread_messages) && $unread_messages->count() > 0)
+            <span class="badge bg-primary rounded-pill">{{ $unread_messages->count() }}</span>
+        @endif
+    </a>
   </li>
   <li class="nav-item">
     <a class="nav-link disabled" aria-disabled="true">Disabled</a>

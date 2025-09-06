@@ -12,7 +12,8 @@ class AdminMessageController extends Controller
     public function create()
     {
         $users = User::all(); // Get all users
-        return view('admin.messages.create', compact('users'));
+        $messages = Message::with('user')->latest()->get();
+        return view('admin.messages.create', compact('users', 'messages'));
     }
 
     public function store(Request $request)
@@ -39,5 +40,11 @@ class AdminMessageController extends Controller
         }
 
         return redirect()->back()->with('success', 'Message sent successfully!');
+    }
+
+    public function destroy(Message $message)
+    {
+        $message->delete();
+        return redirect()->back()->with('success', 'Message deleted successfully!');
     }
 }

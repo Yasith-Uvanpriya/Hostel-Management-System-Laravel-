@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SProfileController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\AdminMessageController;
+use App\Http\Controllers\UserMessageController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -12,11 +13,13 @@ Route::get('/', function () {
 Route::get('/S_interface', function(){
     $user = auth()->user();
     $sProfile = null;
+    $unread_messages = [];
     if ($user) {
         $sProfile = \App\Models\S_profile::where('user_id', $user->id)->first();
+        $unread_messages = \App\Models\Message::where('user_id', $user->id)->where('is_read', false)->latest()->get();
     }
 
-    return view('S_interface', compact('sProfile', 'user'));
+    return view('S_interface', compact('sProfile', 'user', 'unread_messages'));
 });
 Route::get('/a_room', function(){
 return view('admin.a_room');
@@ -47,6 +50,9 @@ Route::get('/profile', function () {
     $user = auth()->user();
     return view('S_interface', compact('user'));
 });
+Route::get('/usermsg', function(){
+    return view('UserMassege');
+});
 Route::post('/aroom', [RoomController::class, 'addRoom']);
 Route::Post('/add-room', [RoomController::class, 'store'])->name('add.room');
 Route::post('/update', [SProfileController::class, 'update'])->name('update');
@@ -58,3 +64,5 @@ Route::post('/login', [UserController::class, 'login'])->name('login');
 
 Route::get('/messages/create', [AdminMessageController::class, 'create'])->name('admin.messages.create');
 Route::post('/messages/store', [AdminMessageController::class, 'store'])->name('admin.messages.store');
+Route::delete('/messages/{message}', [AdminMessageController::class, 'destroy'])->name('admin.messages.destroy');
+Route::get('/messages', [UserMessageController::class, 'index'])->name('user.messages');
