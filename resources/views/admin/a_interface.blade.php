@@ -38,7 +38,6 @@
           <div class="card text-bg-success mb-3 shadow">
             <div class="card-body">
               <h5 class="card-title">Hostels</h5>
-              
               <p class="card-text fs-4">{{ \App\Models\Room::distinct()->count('hostel_name') }}</p>
             </div>
           </div>
@@ -49,7 +48,6 @@
           <div class="card text-bg-warning mb-3 shadow">
             <div class="card-body">
               <h5 class="card-title">Rooms</h5>
-              <p class="card-text fs-4">$12,340</p>
               <p class="card-text fs-4">{{ \App\Models\Room::count() }}</p>
             </div>
           </div>
@@ -60,7 +58,6 @@
           <div class="card text-bg-danger mb-3 shadow">
             <div class="card-body">
               <h5 class="card-title">Beds</h5>
-              <p class="card-text fs-4">38</p>
               <p class="card-text fs-4">{{ \App\Models\Room::sum('bed_number') }}</p>
             </div>
           </div>
