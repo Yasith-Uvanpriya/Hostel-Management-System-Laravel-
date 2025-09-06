@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+<style>
+  .table-scroll {
+    max-height: 50vh;
+    overflow: auto;
+  }
+  .table-scroll table {
+    margin-bottom: 0;
+  }
+</style>
 </head>
 <body>
     <div>
@@ -29,7 +38,8 @@
           <div class="card text-bg-success mb-3 shadow">
             <div class="card-body">
               <h5 class="card-title">Hostels</h5>
-              <p class="card-text fs-4">7</p>
+              
+              <p class="card-text fs-4">{{ \App\Models\Room::distinct()->count('hostel_name') }}</p>
             </div>
           </div>
         </div>
@@ -40,6 +50,7 @@
             <div class="card-body">
               <h5 class="card-title">Rooms</h5>
               <p class="card-text fs-4">$12,340</p>
+              <p class="card-text fs-4">{{ \App\Models\Room::count() }}</p>
             </div>
           </div>
         </div>
@@ -50,17 +61,19 @@
             <div class="card-body">
               <h5 class="card-title">Beds</h5>
               <p class="card-text fs-4">38</p>
+              <p class="card-text fs-4">{{ \App\Models\Room::sum('bed_number') }}</p>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Example Table -->
-      <div class="card mt-4 shadow">
+      <div class="card mt-4 shadow" id="recent-users-card">
         <div class="card-header">
           Recent Users
         </div>
         <div class="card-body">
+          <div class="table-scroll">
           <table class="table table-striped">
             <thead>
               <tr>
@@ -91,16 +104,18 @@
         
       </tbody>
           </table>
-          <a href="#" class="btn btn-primary">View Room</a>
+          </div>
+          <a href="#" class="btn btn-primary" id="btn-view-room">View Room</a>
         </div>
       </div>
 
     </div>
-    <div class="card mt-4 shadow">
+    <div class="card mt-4 shadow" id="view-room-card" style="display: none;">
         <div class="card-header">
           View Room
         </div>
         <div class="card-body">
+          <div class="table-scroll">
           <table class="table table-striped">
             <thead>
               <tr>
@@ -132,7 +147,8 @@
         
       </tbody>
           </table>
-          <a href="#" class="btn btn-primary">Recent Users</a>
+          </div>
+          <a href="#" class="btn btn-primary" id="btn-recent-users">Recent Users</a>
         </div>
       </div>
   </div>
@@ -141,5 +157,30 @@
   </div>
 
     </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var recentCard = document.getElementById('recent-users-card');
+      var viewRoomCard = document.getElementById('view-room-card');
+      var btnViewRoom = document.getElementById('btn-view-room');
+      var btnRecentUsers = document.getElementById('btn-recent-users');
+
+      if (btnViewRoom) {
+        btnViewRoom.addEventListener('click', function (e) {
+          e.preventDefault();
+          if (recentCard) recentCard.style.display = 'none';
+          if (viewRoomCard) viewRoomCard.style.display = '';
+        });
+      }
+
+      if (btnRecentUsers) {
+        btnRecentUsers.addEventListener('click', function (e) {
+          e.preventDefault();
+          if (viewRoomCard) viewRoomCard.style.display = 'none';
+          if (recentCard) recentCard.style.display = '';
+        });
+      }
+    });
+  </script>
 </body>
 </html>
