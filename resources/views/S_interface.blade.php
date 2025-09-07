@@ -15,7 +15,7 @@
         <div class="d-flex justify-content-center mt-4" style="gap: 30px;">
             <!-- Profile Card -->
             <div class="card-body p-4"
-                style="background-color:#f8f9fa; width: 400px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                style="background-color:#f8f9fa; width: 350px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                 @if(isset($sProfile))
                     <div class="row mb-3">
                         <div class="col-sm-4 fw-bold">Index No:</div>
@@ -61,29 +61,21 @@
             </div>
 
             <!-- Notification Alert -->
-            <div style="width: 300px;">
-                <div class="card shadow-sm">
-                    <div class="card-header">
-                        <strong><i class="bi bi-bell"></i> Notifications</strong>
+            <div style="width: 300px; max-height: 70vh; overflow-y: auto;">
+                @if(isset($unread_messages) && $unread_messages->count() > 0)
+                    @foreach($unread_messages as $message)
+                        <div class="alert alert-warning" role="alert">
+                            <h6 class="alert-heading">New Message</h6>
+                            <p>{{ Str::limit($message->message, 50) }}</p>
+                            <hr>
+                            <a href="{{ route('user.messages') }}" class="mb-0">View message</a>
+                        </div>
+                    @endforeach
+                @else
+                    <div class="alert alert-info" role="alert">
+                        No new notifications.
                     </div>
-                    <div class="list-group list-group-flush" style="max-height: 70vh; overflow-y: auto;">
-                        @if(isset($unread_messages) && $unread_messages->count() > 0)
-                            @foreach($unread_messages as $message)
-                                <a href="{{ route('user.messages') }}" class="list-group-item list-group-item-action">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h6 class="mb-1">New Message</h6>
-                                        <small>{{ $message->created_at->diffForHumans() }}</small>
-                                    </div>
-                                    <p class="mb-1">{{ Str::limit($message->message, 50) }}</p>
-                                </a>
-                            @endforeach
-                        @else
-                            <div class="list-group-item">
-                                <p class="mb-0">No new notifications.</p>
-                            </div>
-                        @endif
-                    </div>
-                </div>
+                @endif
             </div>
         </div>
     </div>

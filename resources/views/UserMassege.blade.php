@@ -16,9 +16,10 @@
 </head>
 <body class="bg-light">
 
-@include('Nav bar.navbar')
+
 
 <div class="container mt-5">
+    @include('Nav bar.navbar')
   <h2 class="mb-4 text-center">📩 Messages</h2>
 
   @if($messages->isEmpty())
