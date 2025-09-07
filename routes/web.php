@@ -50,9 +50,7 @@ Route::get('/profile', function () {
     $user = auth()->user();
     return view('S_interface', compact('user'));
 });
-Route::get('/usermsg', function(){
-    return view('UserMassege');
-});
+Route::get('/usermsg', [UserMessageController::class, 'index'])->name('user.messages');
 Route::post('/aroom', [RoomController::class, 'addRoom']);
 Route::Post('/add-room', [RoomController::class, 'store'])->name('add.room');
 Route::post('/update', [SProfileController::class, 'update'])->name('update');
@@ -65,4 +63,3 @@ Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::get('/messages/create', [AdminMessageController::class, 'create'])->name('admin.messages.create');
 Route::post('/messages/store', [AdminMessageController::class, 'store'])->name('admin.messages.store');
 Route::delete('/messages/{message}', [AdminMessageController::class, 'destroy'])->name('admin.messages.destroy');
-Route::get('/messages', [UserMessageController::class, 'index'])->name('user.messages');
