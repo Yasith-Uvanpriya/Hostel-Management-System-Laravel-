@@ -51,7 +51,7 @@ Route::get('/profile', function () {
     return view('S_interface', compact('user'));
 });
 Route::get('/usermsg', [UserMessageController::class, 'index'])->name('user.messages');
-Route::post('/aroom', [RoomController::class, 'addRoom']);
+Route::post('/aroom', [RoomController::class, 'adminStore']);
 Route::Post('/add-room', [RoomController::class, 'store'])->name('add.room');
 Route::post('/update', [SProfileController::class, 'update'])->name('update');
 Route::get('/register', [UserController::class, 'showRegistrationForm']);

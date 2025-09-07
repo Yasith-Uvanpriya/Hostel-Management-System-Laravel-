@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('hostel_name');
             $table->string('room_number');
-            $table->integer('bed_number');
+            $table->integer('number_of_beds');
             $table->string('locker_number');
             $table->timestamps();
         });

@@ -21,9 +21,9 @@
                         <span id="hostelToggleLabel">{{ old('hostelName') ?: 'Select hostel' }}</span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="hostelDropdownToggle">
-                        <li><a class="dropdown-item hostel-item" href="#" data-value="Hostel A">Hostel A</a></li>
-                        <li><a class="dropdown-item hostel-item" href="#" data-value="Hostel B">Hostel B</a></li>
-                        <li><a class="dropdown-item hostel-item" href="#" data-value="Hostel C">Hostel C</a></li>
+                        @foreach($rooms->unique('hostel_name') as $room)
+                            <li><a class="dropdown-item hostel-item" href="#" data-value="{{ $room->hostel_name }}">{{ $room->hostel_name }}</a></li>
+                        @endforeach
                     </ul>
                 </div>
                 <input type="hidden" id="hostelName" name="hostel_name" value="{{ old('hostelName') }}" required>
@@ -36,9 +36,9 @@
                         <span id="roomToggleLabel">{{ old('roomNumber') ?: 'Select Your Room Number' }}</span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="roomDropdownToggle">
-                        <li><a class="dropdown-item room-item" href="#" data-value="Room 101">Room 101</a></li>
-                        <li><a class="dropdown-item room-item" href="#" data-value="Room 102">Room 102</a></li>
-                        <li><a class="dropdown-item room-item" href="#" data-value="Room 201">Room 201</a></li>
+                        @foreach($rooms as $room)
+                            <li><a class="dropdown-item room-item" href="#" data-value="{{ $room->room_number }}" data-beds="{{ $room->number_of_beds }}" data-hostel="{{ $room->hostel_name }}">{{ $room->room_number }}</a></li>
+                        @endforeach
                     </ul>
                 </div>
                 <input type="hidden" id="roomNumber" name="room_number" value="{{ old('roomNumber') }}" required>
@@ -51,13 +51,10 @@
                         <span id="bedToggleLabel">{{ old('bedCount') ?: 'Select Bed Count' }}</span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="bedDropdownToggle">
-                        <li><a class="dropdown-item bed-item" href="#" data-value="1">1</a></li>
-                        <li><a class="dropdown-item bed-item" href="#" data-value="2">2</a></li>
-                        <li><a class="dropdown-item bed-item" href="#" data-value="3">3</a></li>
-                        <li><a class="dropdown-item bed-item" href="#" data-value="4">4</a></li>
+                        <!-- Bed count will be populated by JavaScript -->
                     </ul>
                 </div>
-                <input type="hidden" id="bedCount" name="bed_number" value="{{ old('bedCount') }}" required>
+                <input type="hidden" id="bedCount" name="number_of_beds" value="{{ old('bedCount') }}" required>
             </div>
 
             <div class="mb-3">
@@ -67,10 +64,7 @@
                         <span id="lockerToggleLabel">{{ old('lockerCount') ?: 'Select Locker Count' }}</span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="lockerDropdownToggle">
-                        <li><a class="dropdown-item locker-item" href="#" data-value="1">1</a></li>
-                        <li><a class="dropdown-item locker-item" href="#" data-value="2">2</a></li>
-                        <li><a class="dropdown-item locker-item" href="#" data-value="3">3</a></li>
-                        <li><a class="dropdown-item locker-item" href="#" data-value="4">4</a></li>
+                        <!-- Locker count will be populated by JavaScript -->
                     </ul>
                 </div>
                 <input type="hidden" id="lockerCount" name="locker_number" value="{{ old('lockerCount') }}" required>
@@ -85,55 +79,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function(){
-            // load admin-added rooms from localStorage and inject into dropdowns
-            try{
-                var stored = JSON.parse(localStorage.getItem('rooms') || '[]');
-                if(Array.isArray(stored) && stored.length){
-                    var hostelMenu = document.querySelector('#hostelDropdownToggle + .dropdown-menu') || document.querySelector('.dropdown-menu[aria-labelledby="hostelDropdownToggle"]');
-                    var roomMenu = document.querySelector('#roomDropdownToggle + .dropdown-menu') || document.querySelector('.dropdown-menu[aria-labelledby="roomDropdownToggle"]');
-                    // helper to check existing values
-                    function existsInMenu(menu, value, attr){
-                        if(!menu) return false;
-                        var items = menu.querySelectorAll('.dropdown-item');
-                        for(var i=0;i<items.length;i++){
-                            if((attr === 'text' && items[i].textContent.trim() === value) || (attr === 'data' && items[i].getAttribute('data-value') === value)) return true;
-                        }
-                        return false;
-                    }
-
-                    stored.forEach(function(r){
-                        if(!r || !r.hostel_name) return;
-                        // add hostel if missing
-                        if(hostelMenu && !existsInMenu(hostelMenu, r.hostel_name, 'data')){
-                            var li = document.createElement('li');
-                            li.innerHTML = '<a class="dropdown-item hostel-item" href="#" data-value="'+r.hostel_name+'">'+r.hostel_name+'</a>';
-                            hostelMenu.appendChild(li);
-                        }
-                        // add room if missing
-                        if(roomMenu && !existsInMenu(roomMenu, r.room_number, 'data')){
-                            var li2 = document.createElement('li');
-                            var a = document.createElement('a');
-                            a.className = 'dropdown-item room-item';
-                            a.href = '#';
-                            a.setAttribute('data-value', r.room_number);
-                            a.setAttribute('data-hostel', r.hostel_name);
-                            a.setAttribute('data-bed', String(r.bed_number || ''));
-                            a.setAttribute('data-locker', String(r.locker_number || ''));
-                            a.textContent = r.room_number + ' (' + r.hostel_name + ')';
-                            li2.appendChild(a);
-                            roomMenu.appendChild(li2);
-                        }
-                    });
-                }
-            }catch(e){
-                // ignore storage errors
-                console.warn('load rooms failed', e);
-            }
+            const rooms = @json($rooms);
 
             // hostel dropdown
             var hostelHidden = document.getElementById('hostelName');
             var hostelLabel = document.getElementById('hostelToggleLabel');
             var hostelItems = document.querySelectorAll('.hostel-item');
+            var roomItems = document.querySelectorAll('.room-item');
+            var roomDropdown = document.querySelector('[aria-labelledby="roomDropdownToggle"]');
+
             if(hostelHidden && hostelLabel){
                 if(hostelHidden.value) hostelLabel.textContent = hostelHidden.value;
                 hostelItems.forEach(function(it){
@@ -142,6 +96,15 @@
                         var v = this.getAttribute('data-value') || '';
                         hostelHidden.value = v;
                         hostelLabel.textContent = v || 'Select hostel';
+
+                        // Filter rooms based on hostel
+                        roomItems.forEach(function(roomItem) {
+                            if (roomItem.dataset.hostel === v) {
+                                roomItem.style.display = 'block';
+                            } else {
+                                roomItem.style.display = 'none';
+                            }
+                        });
                     });
                 });
             }
@@ -149,55 +112,71 @@
             // room dropdown
             var roomHidden = document.getElementById('roomNumber');
             var roomLabel = document.getElementById('roomToggleLabel');
-            var roomItems = document.querySelectorAll('.room-item');
+            var bedDropdown = document.querySelector('[aria-labelledby="bedDropdownToggle"]');
+            var lockerDropdown = document.querySelector('[aria-labelledby="lockerDropdownToggle"]');
+            var bedHidden = document.getElementById('bedCount');
+            var lockerHidden = document.getElementById('lockerCount');
+            var bedLabel = document.getElementById('bedToggleLabel');
+            var lockerLabel = document.getElementById('lockerToggleLabel');
+
             if(roomHidden && roomLabel){
                 if(roomHidden.value) roomLabel.textContent = roomHidden.value;
                 roomItems.forEach(function(it){
                     it.addEventListener('click', function(e){
                         e.preventDefault();
                         var v = this.getAttribute('data-value') || '';
+                        var beds = this.getAttribute('data-beds') || 0;
                         roomHidden.value = v;
                         roomLabel.textContent = v || 'Select Your Room Number';
+
+                        // Populate bed and locker dropdowns
+                        bedDropdown.innerHTML = '';
+                        lockerDropdown.innerHTML = '';
+                        for (let i = 1; i <= beds; i++) {
+                            bedDropdown.innerHTML += `<li><a class="dropdown-item bed-item" href="#" data-value="${i}">${i}</a></li>`;
+                            lockerDropdown.innerHTML += `<li><a class="dropdown-item locker-item" href="#" data-value="${i}">${i}</a></li>`;
+                        }
+                        
+                        // Add event listeners to new bed and locker items
+                        addBedLockerListeners();
                     });
                 });
             }
 
-            // bed and locker dropdowns with sync
-            var bedHidden = document.getElementById('bedCount');
-            var lockerHidden = document.getElementById('lockerCount');
-            var bedLabel = document.getElementById('bedToggleLabel');
-            var lockerLabel = document.getElementById('lockerToggleLabel');
-            var bedItems = document.querySelectorAll('.bed-item');
-            var lockerItems = document.querySelectorAll('.locker-item');
-            var lockerManuallyChanged = false;
+            function addBedLockerListeners() {
+                var bedItems = document.querySelectorAll('.bed-item');
+                var lockerItems = document.querySelectorAll('.locker-item');
+                var lockerManuallyChanged = false;
 
-            if(bedHidden && lockerHidden && bedLabel && lockerLabel){
-                if(bedHidden.value) bedLabel.textContent = bedHidden.value;
-                if(lockerHidden.value) lockerLabel.textContent = lockerHidden.value;
+                if(bedHidden && lockerHidden && bedLabel && lockerLabel){
+                    if(bedHidden.value) bedLabel.textContent = bedHidden.value;
+                    if(lockerHidden.value) lockerLabel.textContent = lockerHidden.value;
 
-                bedItems.forEach(function(b){
-                    b.addEventListener('click', function(e){
-                        e.preventDefault();
-                        var v = this.getAttribute('data-value') || '';
-                        bedHidden.value = v;
-                        bedLabel.textContent = v || 'Select Bed Count';
-                        if(!lockerManuallyChanged){
+                    bedItems.forEach(function(b){
+                        b.addEventListener('click', function(e){
+                            e.preventDefault();
+                            var v = this.getAttribute('data-value') || '';
+                            bedHidden.value = v;
+                            bedLabel.textContent = v || 'Select Bed Count';
+                            if(!lockerManuallyChanged){
+                                lockerHidden.value = v;
+                                lockerLabel.textContent = v || 'Select Locker Count';
+                            }
+                        });
+                    });
+
+                    lockerItems.forEach(function(l){
+                        l.addEventListener('click', function(e){
+                            e.preventDefault();
+                            var v = this.getAttribute('data-value') || '';
                             lockerHidden.value = v;
                             lockerLabel.textContent = v || 'Select Locker Count';
-                        }
+                            lockerManuallyChanged = true;
+                        });
                     });
-                });
-
-                lockerItems.forEach(function(l){
-                    l.addEventListener('click', function(e){
-                        e.preventDefault();
-                        var v = this.getAttribute('data-value') || '';
-                        lockerHidden.value = v;
-                        lockerLabel.textContent = v || 'Select Locker Count';
-                        lockerManuallyChanged = true;
-                    });
-                });
+                }
             }
+            addBedLockerListeners();
         });
     </script>
 </html>

@@ -58,7 +58,7 @@
           <div class="card text-bg-danger mb-3 shadow">
             <div class="card-body">
               <h5 class="card-title">Beds</h5>
-              <p class="card-text fs-4">{{ \App\Models\Room::sum('bed_number') }}</p>
+              <p class="card-text fs-4">{{ \App\Models\Room::sum('number_of_beds') }}</p>
             </div>
           </div>
         </div>
@@ -134,7 +134,7 @@
     <td>{{ $room->user?->profile?->name ?? 'N/A' }}</td>
     <td>{{ $room->room_number }}</td>
     <td>{{ $room->hostel_name }}</td>
-    <td>{{ $room->bed_number }}</td>
+    <td>{{ $room->number_of_beds }}</td>
     <td>{{ $room->locker_number }}</td>
     <td>{{ $room->created_at }}</td>
     <td>{{ $room->updated_at }}</td>
