@@ -33,9 +33,7 @@ Route::post('/admin/login', [\App\Http\Controllers\AdminController::class, 'logi
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'dashboard'])->name('admin.dashboard');
 });
-Route::get('/test', function () {
-    return view('admin.a_interface');
-});
+
 Route::get('/profile/{id}', function($id){
     $user = \App\Models\User::find($id);
     return view('Profile', compact('user'));
