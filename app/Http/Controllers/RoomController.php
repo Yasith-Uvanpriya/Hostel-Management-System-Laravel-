@@ -37,21 +37,22 @@ class RoomController extends Controller
     {
         $request->validate([
             'hostel_name' => 'required',
-            'room_number' => 'required|unique:rooms',
+            'room_number' => 'required',
             'number_of_beds' => 'required|integer|min:1',
             'locker_number' => 'required|integer|min:0'
         ]);
 
-        $room = new Room([
-            'hostel_name' => $request->hostel_name,
-            'room_number' => $request->room_number,
-            'number_of_beds' => $request->number_of_beds,
-            'locker_number' => $request->locker_number,
-        ]);
-        $room->user_id = auth()->id();
-        $room->save();
-        
-        $data = Room::all();
+        $room = Room::updateOrCreate(
+            [
+                'hostel_name' => $request->hostel_name,
+                'room_number' => $request->room_number,
+            ],
+            [
+                'number_of_beds' => $request->number_of_beds,
+                'locker_number' => $request->locker_number,
+                'user_id' => auth()->id(),
+            ]
+        );
 
         return redirect('/room')->with('success', 'Room added successfully!');
 
