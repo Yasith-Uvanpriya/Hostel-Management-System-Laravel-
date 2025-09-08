@@ -10,31 +10,49 @@ class RoomController extends Controller
 {
     public function add()
     {
-        return view('room');
+        $rooms = Room::all();
+        return view('room', compact('rooms'));
     }
-    public function addRoom(){
-        return view('room');
-    }
-    
-    public function store(Request $request)
+    public function adminStore(Request $request)
     {
         $request->validate([
             'hostel_name' => 'required',
             'room_number' => 'required|unique:rooms',
-            'bed_number' => 'required|integer|min:1',
+            'number_of_beds' => 'required|integer|min:1',
             'locker_number' => 'required|integer|min:0'
         ]);
 
         $room = new Room([
             'hostel_name' => $request->hostel_name,
             'room_number' => $request->room_number,
-            'bed_number' => $request->bed_number,
+            'number_of_beds' => $request->number_of_beds,
             'locker_number' => $request->locker_number,
         ]);
-        $room->user_id = auth()->id();
         $room->save();
         
-        $data = Room::all();
+        return redirect('/a_room')->with('success', 'Room added successfully!');
+    }
+    
+    public function store(Request $request)
+    {
+        $request->validate([
+            'hostel_name' => 'required',
+            'room_number' => 'required',
+            'number_of_beds' => 'required|integer|min:1',
+            'locker_number' => 'required|integer|min:0'
+        ]);
+
+        $room = Room::updateOrCreate(
+            [
+                'hostel_name' => $request->hostel_name,
+                'room_number' => $request->room_number,
+            ],
+            [
+                'number_of_beds' => $request->number_of_beds,
+                'locker_number' => $request->locker_number,
+                'user_id' => auth()->id(),
+            ]
+        );
 
         return redirect('/room')->with('success', 'Room added successfully!');
 

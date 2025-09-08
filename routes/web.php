@@ -33,9 +33,7 @@ Route::post('/admin/login', [\App\Http\Controllers\AdminController::class, 'logi
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'dashboard'])->name('admin.dashboard');
 });
-Route::get('/test', function () {
-    return view('admin.a_interface');
-});
+
 Route::get('/profile/{id}', function($id){
     $user = \App\Models\User::find($id);
     return view('Profile', compact('user'));
@@ -51,7 +49,7 @@ Route::get('/profile', function () {
     return view('S_interface', compact('user'));
 });
 Route::get('/usermsg', [UserMessageController::class, 'index'])->name('user.messages');
-Route::post('/aroom', [RoomController::class, 'addRoom']);
+Route::post('/aroom', [RoomController::class, 'adminStore']);
 Route::Post('/add-room', [RoomController::class, 'store'])->name('add.room');
 Route::post('/update', [SProfileController::class, 'update'])->name('update');
 Route::get('/register', [UserController::class, 'showRegistrationForm']);

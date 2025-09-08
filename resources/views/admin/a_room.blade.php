@@ -24,12 +24,12 @@
                 <input type="text" class="form-control" id="room_number" name="room_number" required>
             </div>
             <div class="mb-3">
-                <label for="bed_number" class="form-label">Bed Count</label>
+                <label for="number_of_beds" class="form-label">Bed Count</label>
                 <a href="#" class="btn btn-secondary m-2 bed-choice" data-value="4">4</a>
                 <a href="#" class="btn btn-secondary m-2 bed-choice" data-value="6">6</a>
                 <a href="#" class="btn btn-secondary m-2 bed-choice" data-value="8">8</a>
                 <!-- hidden input so bed count is submitted; locker input will display/edit this value -->
-                <input type="hidden" id="bed_number" name="bed_number" value="">
+                <input type="hidden" id="number_of_beds" name="number_of_beds" value="">
             </div>
             <div class="mb-3">
                 <label for="locker_number" class="form-label">Locker Count</label>
@@ -41,7 +41,7 @@
         <script>
             document.addEventListener('DOMContentLoaded', function(){
                 var locker = document.getElementById('locker_number');
-                var bed = document.getElementById('bed_number');
+                var bed = document.getElementById('number_of_beds');
                 var choices = document.querySelectorAll('.bed-choice');
                 if(!locker || !bed) return;
 
@@ -70,30 +70,4 @@
                 });
             });
         </script>
-        <script>
-            // store admin-added rooms into localStorage so user page can read them
-            (function(){
-                var form = document.querySelector('form[action="/aroom"]');
-                if(!form) return;
-                form.addEventListener('submit', function(){
-                    try{
-                        var hostel = document.getElementById('hostel_name') ? document.getElementById('hostel_name').value.trim() : '';
-                        var room = document.getElementById('room_number') ? document.getElementById('room_number').value.trim() : '';
-                        var bed = document.getElementById('bed_number') ? document.getElementById('bed_number').value.trim() : '';
-                        var locker = document.getElementById('locker_number') ? document.getElementById('locker_number').value.trim() : '';
-                        if(!hostel || !room) return; // require basic data
-                        var stored = JSON.parse(localStorage.getItem('rooms') || '[]');
-                        // avoid duplicates by matching hostel + room
-                        var exists = stored.find(function(r){ return r.hostel_name === hostel && r.room_number === room; });
-                        if(!exists){
-                            stored.push({hostel_name: hostel, room_number: room, bed_number: bed || 0, locker_number: locker || 0});
-                            localStorage.setItem('rooms', JSON.stringify(stored));
-                        }
-                    }catch(e){
-                        // silently ignore localStorage issues
-                        console.warn('rooms save failed', e);
-                    }
-                    // allow normal form submission to proceed
-                });
-            })();
-        </script>
+        

@@ -4,15 +4,43 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Room;
+use App\Models\S_profile;
 
 class AdminController extends Controller
 {
-    public function dashboard()
+    public function dashboard(Request $request)
     {
+        $search = $request->input('search');
+        $roomSearch = $request->input('room_search');
+
+        $sprofiles = S_profile::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('Index_no', 'like', "%{$search}%")
+                             ->orWhere('name', 'like', "%{$search}%");
+            })
+            ->get();
+
+        $rooms = Room::with('user.profile')
+            ->when($roomSearch, function ($query, $roomSearch) {
+                // Split the search string by space
+                $keywords = explode(' ', $roomSearch);
+
+                foreach ($keywords as $keyword) {
+                    $query->where(function ($q) use ($keyword) {
+                        $q->where('hostel_name', 'like', "%{$keyword}%")
+                          ->orWhere('room_number', 'like', "%{$keyword}%")
+                          ->orWhere('number_of_beds', 'like', "%{$keyword}%");
+                    });
+                }
+                return $query;
+            })
+            ->get();
+
         $users = User::latest()->take(10)->get();
         $userCount = User::count();
 
-        return view('admin.a_interface', compact('users', 'userCount'));
+        return view('admin.a_interface', compact('users', 'userCount', 'sprofiles', 'rooms', 'search', 'roomSearch'));
     }
 
     public function showLoginForm()
