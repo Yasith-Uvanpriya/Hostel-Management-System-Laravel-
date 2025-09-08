@@ -45,7 +45,7 @@
     <a href="/admin"><i class="bi bi-speedometer2"></i> Dashboard</a>
     <a href="/a_room"><i class="bi bi-building"></i> Add Hostels</a>
     <a href="/messages/create"><i class="bi bi-envelope-fill"></i> Messages</a>
-    <a href="/admin/a_complains"><i class="bi bi-gear"></i> Complaints</a>
+    <a href="{{ route('admin.complaints.index') }}"><i class="bi bi-gear"></i> Complaints</a>
     <a href="#"><i class="bi bi-box-arrow-right"></i> Logout</a>
   </div>
 

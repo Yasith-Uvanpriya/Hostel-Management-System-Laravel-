@@ -62,18 +62,18 @@
 
             <!-- Notification Alert -->
             <div style="width: 300px; max-height: 70vh; overflow-y: auto;">
-                @if(isset($unread_messages) && $unread_messages->count() > 0)
-                    @foreach($unread_messages as $message)
-                        <div class="alert alert-warning" role="alert">
-                            <h6 class="alert-heading">New Message</h6>
+                @if(isset($messages) && $messages->count() > 0)
+                    @foreach($messages as $message)
+                        <div class="alert alert-{{ $message->status == 'Resolved' ? 'success' : 'warning' }}" role="alert">
+                            <h6 class="alert-heading">Complaint #{{ $message->id }} - {{ $message->type }}</h6>
                             <p>{{ Str::limit($message->message, 50) }}</p>
                             <hr>
-                            <a href="{{ route('user.messages') }}" class="mb-0">View message</a>
+                            <p class="mb-0">Status: <strong>{{ $message->status }}</strong></p>
                         </div>
                     @endforeach
                 @else
                     <div class="alert alert-info" role="alert">
-                        No new notifications.
+                        You have no submitted complaints.
                     </div>
                 @endif
             </div>
