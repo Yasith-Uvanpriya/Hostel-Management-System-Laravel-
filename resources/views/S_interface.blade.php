@@ -12,7 +12,7 @@
 
         @include('Nav bar.navbar')
 
-        <div class="d-flex justify-content-center mt-4" style="gap: 30px;">
+        <div class="d-flex justify-content-center mt-4" style="gap: 30px; width: 1100px">
             <!-- Profile Card -->
             <div class="card-body p-4"
                 style="background-color:#f8f9fa; width: 350px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
@@ -78,6 +78,64 @@
                 @endif
             </div>
         </div>
+
+        <!-- Complaint Boxes Section -->
+        <div class="row mt-5 g-4">
+            <div class="col-md-3 col-6">
+                <div class="complaint-box water d-flex align-items-center justify-content-center">
+                    <h5 class="text-white text-center">Water Complaints</h5>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="complaint-box electricity d-flex align-items-center justify-content-center">
+                    <h5 class="text-white text-center">Electricity Complaints</h5>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="complaint-box cleaning d-flex align-items-center justify-content-center">
+                    <h5 class="text-white text-center">Cleaning Complaints</h5>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="complaint-box room d-flex align-items-center justify-content-center">
+                    <h5 class="text-white text-center">Room Complaints</h5>
+                </div>
+            </div>
+        </div>
+
     </div>
+
+    <style>
+        .complaint-box {
+            height: 150px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s;
+            cursor: pointer;
+        }
+        .complaint-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        .water { background: #1e8fffde; }       /* Blue */
+        .electricity { background: #ffa600e6; } /* Orange */
+        .cleaning { background: #32cd32e1; }    /* Green */
+        .room { background: #ff6347de; }        /* Red */
+        .clicked {
+            opacity: 0.5;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const complaintBoxes = document.querySelectorAll('.complaint-box');
+
+            complaintBoxes.forEach(box => {
+                box.addEventListener('click', function () {
+                    this.classList.toggle('clicked');
+                });
+            });
+        });
+    </script>
 </body>
 </html>

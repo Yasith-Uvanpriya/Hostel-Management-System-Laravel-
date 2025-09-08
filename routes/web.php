@@ -34,6 +34,11 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'dashboard'])->name('admin.dashboard');
 });
 
+Route::get('/admin/a_complains', function(){
+    $messages = \App\Models\Message::all();
+    return view('admin.a_complains', compact('messages'));
+});
+
 Route::get('/profile/{id}', function($id){
     $user = \App\Models\User::find($id);
     return view('Profile', compact('user'));
