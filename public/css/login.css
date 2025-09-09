@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+body {
+  background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+  min-height: 100vh;
+  font-family: 'Roboto', Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-mainbox {
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.10);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 48px 32px;
+  max-width: 900px;
+  width: 100%;
+  gap: 40px;
+}
+
+.login-imagebox {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-image {
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  background: #f3f6fd;
+}
+
+.login-contentbox {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.login-title {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #2193b0;
+  margin-bottom: 32px;
+  ;
+}
+
+.form-label {
+  font-weight: 500;
+  color: #185a9d;
+}
+
+.form-control {
+  border-radius: 12px;
+  border: 1px solid #b2bec3;
+  font-size: 1rem;
+  padding: 0.7rem 1rem;
+  margin-bottom: 8px;
+  transition: border-color 0.2s;
+  width: 350px;
+  max-width: 100%;
+}
+
+.form-control:focus {
+  border-color: #2193b0;
+  box-shadow: 0 0 0 2px #6dd5ed33;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #6dd5ed, #2193b0);
+  border: none;
+  border-radius: 50px;
+  font-weight: 600;
+  padding: 0.7rem 2rem;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 8px rgba(33,147,176,0.10);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(90deg, #2193b0, #6dd5ed);
+  box-shadow: 0 8px 24px rgba(33,147,176,0.18);
+  transform: translateY(-2px) scale(1.04);
+}
+
+.invalid-feedback {
+  font-size: 0.95rem;
+  margin-top: 2px;
+}
+
+.login-contentbox .mt-4 {
+  margin-top: 2rem !important;
+}
+
+.login-contentbox .text-center {
+  font-size: 1rem;
+  color: #444;
+}
+
+.login-contentbox .text-primary {
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.login-contentbox .text-primary:hover {
+  color: #185a9d;
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .login-mainbox {
+    flex-direction: column;
+    padding: 32px 16px;
+    gap: 24px;
+  }
+  .login-image {
+    width: 100%;
+    height: 180px;
+  }
+  .login-contentbox {
+    align-items: center;
+    text-align: center;
+  }
+  .form-control {
+    width: 100%;
+  }
+}
