@@ -45,4 +45,16 @@ class UserMessageController extends Controller
 
         return redirect('/S_interface')->with('success', 'Your complaint has been submitted successfully!');
     }
+
+    public function destroy(Message $message)
+    {
+        // Ensure the user owns the message
+        if ($message->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $message->delete();
+
+        return redirect('/S_interface')->with('success', 'Notification removed successfully!');
+    }
 }

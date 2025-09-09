@@ -62,13 +62,26 @@
 
             <!-- Notification Alert -->
             <div style="width: 300px; max-height: 70vh; overflow-y: auto;">
+                @if(session('success'))
+                    <div class="alert alert-success">{{ session('success') }}</div>
+                @endif
+
                 @if(isset($messages) && $messages->count() > 0)
                     @foreach($messages as $message)
                         <div class="alert alert-{{ $message->status == 'Resolved' ? 'success' : 'warning' }}" role="alert">
-                            <h6 class="alert-heading">Complaint #{{ $message->id }} - {{ $message->type }}</h6>
+                            <h6 class="alert-heading">Complaint #{{ $message->id }} - {{ ucfirst($message->type) }}</h6>
                             <p>{{ Str::limit($message->message, 50) }}</p>
                             <hr>
-                            <p class="mb-0">Status: <strong>{{ $message->status }}</strong></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="mb-0">Status: <strong>{{ $message->status }}</strong></p>
+                                @if($message->status == 'Resolved')
+                                    <form action="{{ route('user.complaints.destroy', $message->id) }}" method="POST" class="mb-0">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">Remove</button>
+                                    </form>
+                                @endif
+                            </div>
                         </div>
                     @endforeach
                 @else
