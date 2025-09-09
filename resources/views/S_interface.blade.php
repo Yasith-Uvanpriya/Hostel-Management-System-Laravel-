@@ -82,24 +82,24 @@
         <!-- Complaint Boxes Section -->
         <div class="row mt-5 g-4">
             <div class="col-md-3 col-6">
-                <div class="complaint-box water d-flex align-items-center justify-content-center">
+                <a href="{{ route('user.complaints.create', 'water') }}" class="complaint-box water d-flex align-items-center justify-content-center text-decoration-none">
                     <h5 class="text-white text-center">Water Complaints</h5>
-                </div>
+                </a>
             </div>
             <div class="col-md-3 col-6">
-                <div class="complaint-box electricity d-flex align-items-center justify-content-center">
+                <a href="{{ route('user.complaints.create', 'electricity') }}" class="complaint-box electricity d-flex align-items-center justify-content-center text-decoration-none">
                     <h5 class="text-white text-center">Electricity Complaints</h5>
-                </div>
+                </a>
             </div>
             <div class="col-md-3 col-6">
-                <div class="complaint-box cleaning d-flex align-items-center justify-content-center">
+                <a href="{{ route('user.complaints.create', 'cleaning') }}" class="complaint-box cleaning d-flex align-items-center justify-content-center text-decoration-none">
                     <h5 class="text-white text-center">Cleaning Complaints</h5>
-                </div>
+                </a>
             </div>
             <div class="col-md-3 col-6">
-                <div class="complaint-box room d-flex align-items-center justify-content-center">
+                <a href="{{ route('user.complaints.create', 'room') }}" class="complaint-box room d-flex align-items-center justify-content-center text-decoration-none">
                     <h5 class="text-white text-center">Room Complaints</h5>
-                </div>
+                </a>
             </div>
         </div>
 
@@ -110,7 +110,7 @@
             height: 150px;
             border-radius: 15px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
             cursor: pointer;
         }
         .complaint-box:hover {
@@ -121,21 +121,7 @@
         .electricity { background: #ffa600e6; } /* Orange */
         .cleaning { background: #32cd32e1; }    /* Green */
         .room { background: #ff6347de; }        /* Red */
-        .clicked {
-            opacity: 0.5;
-        }
     </style>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const complaintBoxes = document.querySelectorAll('.complaint-box');
-
-            complaintBoxes.forEach(box => {
-                box.addEventListener('click', function () {
-                    this.classList.toggle('clicked');
-                });
-            });
-        });
-    </script>
 </body>
 </html>
