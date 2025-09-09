@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Room;
 use App\Models\S_profile;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -75,5 +76,16 @@ class AdminController extends Controller
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/admin/login');
     }
 }

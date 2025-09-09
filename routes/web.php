@@ -30,6 +30,7 @@ Route::get('/room', [RoomController::class, 'add']);
 // Admin dashboard route
 Route::get('/admin/login', [\App\Http\Controllers\AdminController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin/login', [\App\Http\Controllers\AdminController::class, 'login'])->name('admin.login.submit');
+Route::post('/admin/logout', [\App\Http\Controllers\AdminController::class, 'logout'])->name('admin.logout');
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/admin/complaints/{type?}', [\App\Http\Controllers\AdminMessageController::class, 'index'])->name('admin.complaints.index');

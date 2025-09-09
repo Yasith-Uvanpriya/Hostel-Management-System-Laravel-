@@ -45,8 +45,16 @@
     <a href="/admin"><i class="bi bi-speedometer2"></i> Dashboard</a>
     <a href="/a_room"><i class="bi bi-building"></i> Add Hostels</a>
     <a href="/messages/create"><i class="bi bi-envelope-fill"></i> Messages</a>
-    <a href="{{ route('admin.complaints.index') }}"><i class="bi bi-gear"></i> Complaints</a>
-    <a href="#"><i class="bi bi-box-arrow-right"></i> Logout</a>
+    <a href="{{ route('admin.complaints.index') }}"><i class="bi bi-exclamation-triangle"></i> Complaints</a>
+    <a href="{{ route('admin.logout') }}"
+       onclick="event.preventDefault();
+                 document.getElementById('logout-form').submit();">
+        <i class="bi bi-box-arrow-right"></i> Logout
+    </a>
+
+    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
+        @csrf
+    </form>
   </div>
 
   
