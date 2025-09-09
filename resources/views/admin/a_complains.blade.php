@@ -42,7 +42,7 @@
             @php
                 $cardColor = $typeColors[$message->type] ?? 'info';
             @endphp
-            <div class="card mb-4 shadow-sm {{ $message->status == 'Resolved' ? 'bg-light' : '' }}">
+            <div class="card mb-4 shadow-sm {{ $message->status == 'Resolved' ? 'bg-secondary text-white' : '' }}">
               <div class="card-header bg-{{ $cardColor }} text-white">
                 <h5 class="mb-0"><i class="fa-solid fa-clipboard-list"></i> Complaint #{{ $message->id }}</h5>
               </div>
