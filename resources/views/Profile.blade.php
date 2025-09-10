@@ -120,9 +120,9 @@
 
         if (facultySelect && departmentSelect) {
             const departments = {
-                "Computing": ["Software Engineering", "Cyber Security", "Data Science"],
+                "Computing": ["Software Engineering", "Computing and Information System", "Data Science"],
                 "Management": ["Accounting", "Business Admin", "HR Management"],
-                "Applied Science": ["Biology", "Physics", "Chemistry"],
+                "Applied Science": ["Natural Resources", "Food Science", "Sports"],
                 "Agriculture": ["Agronomy", "Horticulture", "Animal Science"],
                 "Medicine": ["Nursing", "Pharmacy", "Public Health"],
                 "Social Science and Languages": ["Psychology", "Sociology", "English"]
