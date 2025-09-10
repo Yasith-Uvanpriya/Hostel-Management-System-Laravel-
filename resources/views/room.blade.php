@@ -46,7 +46,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="bedCount" class="form-label">Bed Count</label>
+                <label for="bedCount" class="form-label">Bed Number</label>
                 <div class="dropdown">
                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="bedDropdownToggle" data-bs-toggle="dropdown" aria-expanded="false">
                         <span id="bedToggleLabel">{{ old('bedCount') ?: 'Select Bed Count' }}</span>
@@ -59,7 +59,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="lockerCount" class="form-label">Locker Count</label>
+                <label for="lockerCount" class="form-label">Locker Number</label>
                 <div class="dropdown">
                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="lockerDropdownToggle" data-bs-toggle="dropdown" aria-expanded="false">
                         <span id="lockerToggleLabel">{{ old('lockerCount') ?: 'Select Locker Count' }}</span>
