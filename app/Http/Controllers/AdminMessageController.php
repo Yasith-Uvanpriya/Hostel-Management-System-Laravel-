@@ -13,7 +13,7 @@ class AdminMessageController extends Controller
 {
     public function index($type = null)
     {
-        $query = Message::with(['user.room', 'user.profile']);
+        $query = Message::with(['user.room', 'user.profile'])->where('type', '!=', 'admin');
 
         if ($type) {
             $query->where('type', $type);
@@ -26,7 +26,7 @@ class AdminMessageController extends Controller
     public function create()
     {
         $users = User::all(); // Get all users
-        $messages = Message::with('user')->latest()->get();
+        $messages = Message::with('user')->where('type', 'admin')->latest()->get();
         return view('admin.messages.create', compact('users', 'messages'));
     }
 
@@ -40,7 +40,8 @@ class AdminMessageController extends Controller
             // Send to specific user
             Message::create([
                 'user_id' => $request->user_id,
-                'message' => $request->message
+                'message' => $request->message,
+                'type' => 'admin'
             ]);
         } else {
             // Send to all users
@@ -48,7 +49,8 @@ class AdminMessageController extends Controller
             foreach ($users as $user) {
                 Message::create([
                     'user_id' => $user->id,
-                    'message' => $request->message
+                    'message' => $request->message,
+                    'type' => 'admin'
                 ]);
             }
         }
