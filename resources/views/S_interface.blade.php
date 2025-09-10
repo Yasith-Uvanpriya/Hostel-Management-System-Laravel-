@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/interface.css') }}">
 </head>
 <body>
     <div class="container">
         <h1 class="text-center">Hi Wellcome {{ Auth::user()->name }}</h1>
-
         @include('Nav bar.navbar')
-
         <div class="d-flex justify-content-center mt-4" style="gap: 30px; width: 1100px">
             <!-- Profile Card -->
             <div class="card-body p-4"
@@ -115,26 +114,6 @@
                 </a>
             </div>
         </div>
-
     </div>
-
-    <style>
-        .complaint-box {
-            height: 150px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
-        }
-        .complaint-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-        }
-        .water { background: #1e8fffde; }       /* Blue */
-        .electricity { background: #ffa600e6; } /* Orange */
-        .cleaning { background: #32cd32e1; }    /* Green */
-        .room { background: #ff6347de; }        /* Red */
-    </style>
-
 </body>
 </html>
