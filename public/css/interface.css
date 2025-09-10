@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+body {
+  background: #e0eafc;
+  font-family: 'Roboto', Arial, sans-serif;
+  min-height: 100vh;
+}
+
+.container {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+h1.text-center {
+  font-size: 2.3rem;
+  font-weight: 700;
+  color: #185a9d;
+  margin-bottom: 36px;
+  letter-spacing: 1.5px;
+  background: none;
+  -webkit-background-clip: initial;
+  -webkit-text-fill-color: initial;
+  background-clip: initial;
+}
+
+.d-flex[style] {
+  gap: 36px !important;
+  width: 1100px !important;
+  margin: 0 auto;
+}
+
+.card-body {
+  background: #f8fafc;
+  width: 370px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.13);
+  padding: 36px 28px;
+  margin-bottom: 0;
+  transition: box-shadow 0.2s;
+}
+
+.card-body:hover {
+  box-shadow: 0 16px 40px rgba(44, 62, 80, 0.18);
+}
+
+.card-body .row {
+  margin-bottom: 14px;
+}
+
+.card-body .fw-bold {
+  color: #2193b0;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: #2193b0;
+  border: none;
+  border-radius: 50px;
+  font-weight: 600;
+  padding: 0.7rem 2.2rem;
+  font-size: 1.1rem;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(33,147,176,0.13);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.btn-primary:hover {
+  background: #185a9d;
+  box-shadow: 0 8px 24px rgba(33,147,176,0.18);
+  transform: translateY(-2px) scale(1.04);
+}
+
+.alert {
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.10);
+  font-size: 1rem;
+  margin-bottom: 20px;
+  background: #f8fafc;
+  border: none;
+}
+
+.alert-heading {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #185a9d;
+}
+
+.complaint-box {
+  height: 150px;
+  border-radius: 18px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decent solid colors for complaint boxes */
+.water { background: #43cea2; }
+.electricity { background: #ffd200; }
+.cleaning { background: #32cd32; }
+.room { background: #ff6347; }
+
+.complaint-box h5 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  text-shadow: 0 2px 8px rgba(44,62,80,0.10);
+}
+
+.complaint-box:hover {
+  transform: translateY(-7px) scale(1.04);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.22);
+}
+
+@media (max-width: 1200px) {
+  .d-flex[style] {
+    width: 100% !important;
+    gap: 18px !important;
+    flex-direction: column !important;
+  }
+  .card-body {
+    width: 100%;
+    margin-bottom: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  h1.text-center {
+    font-size: 1.5rem;
+    margin-bottom: 18px;
+  }
+  .card-body {
+    padding: 18px 8px;
+  }
+  .complaint-box {
+    height: 100px;
+    font-size: 1rem;
+  }
+}
