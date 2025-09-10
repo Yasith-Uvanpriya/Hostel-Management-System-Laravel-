@@ -127,7 +127,6 @@
                 "Medicine": ["Nursing", "Pharmacy", "Public Health"],
                 "Social Science and Languages": ["Psychology", "Sociology", "English"]
             };
-            };
 
             facultySelect.addEventListener('change', function () {
                 const selectedFaculty = this.value;
@@ -143,6 +142,7 @@
                 }
             });
         }
+
     </script>
 </body>
 </html>
