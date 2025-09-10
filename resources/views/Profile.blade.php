@@ -68,9 +68,9 @@
                                             <option value="Computing">Computing</option>
                                             <option value="Management">Management</option>
                                             <option value="Applied Science">Applied Science</option>
-                                            <option value="Computing">Agriculture</option>
-                                            <option value="Computing">Medicine</option>
-                                            <option value="Computing">Social Science and Languages</option>
+                                            <option value="Agriculture">Agriculture</option>
+                                            <option value="Medicine">Medicine</option>
+                                            <option value="Social Science and Languages">Social Science and Languages</option>
                                         </select>
                                     </div>
                                     <div class="col-md-6 mb-3">
