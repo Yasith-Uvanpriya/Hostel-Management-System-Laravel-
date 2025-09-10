@@ -122,7 +122,11 @@
             const departments = {
                 "Computing": ["Software Engineering", "Cyber Security", "Data Science"],
                 "Management": ["Accounting", "Business Admin", "HR Management"],
-                "Applied Science": ["Biology", "Physics", "Chemistry"]
+                "Applied Science": ["Biology", "Physics", "Chemistry"],
+                "Agriculture": ["Agronomy", "Horticulture", "Animal Science"],
+                "Medicine": ["Nursing", "Pharmacy", "Public Health"],
+                "Social Science and Languages": ["Psychology", "Sociology", "English"]
+            };
             };
 
             facultySelect.addEventListener('change', function () {
