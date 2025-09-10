@@ -46,7 +46,7 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-4 text-center">
-                                <img src="{{ asset('images/hostel.png') }}" alt="Profile Picture" class="profile-picture">
+                                <img src="{{ asset('images/user') }}" alt="Profile Picture" class="profile-picture">
                                 <h4 class="mt-3">{{ Auth::user()->name }}</h4>
                                 <p class="text-muted">Student</p>
                             </div>
