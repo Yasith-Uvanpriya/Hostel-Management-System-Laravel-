@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+body {
+  background: linear-gradient(120deg, #e0eafc 0%, #b6e0fe 100%);
+  font-family: 'Roboto', Arial, sans-serif;
+  min-height: 100vh;
+}
+
+.container {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  max-width: 700px;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2193b0;
+  margin-bottom: 32px;
+  letter-spacing: 1px;
+}
+
+.card {
+  border-radius: 18px;
+  box-shadow: 0 4px 16px rgba(44, 62, 80, 0.10);
+  border: none;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.card.border-primary {
+  border: 2px solid #2193b0 !important;
+}
+
+.card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.1rem 1.3rem;
+}
+
+.message-preview {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 70%;
+  font-size: 1.08rem;
+  color: #185a9d;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #43cea2, #185a9d);
+  border: none;
+  border-radius: 50px;
+  font-weight: 600;
+  padding: 0.5rem 1.4rem;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(33,147,176,0.10);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(90deg, #185a9d, #43cea2);
+  box-shadow: 0 8px 24px rgba(33,147,176,0.18);
+  transform: translateY(-2px) scale(1.04);
+}
+
+.modal-content {
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.18);
+}
+
+.modal-header {
+  border-bottom: none;
+  background: linear-gradient(90deg, #6dd5ed, #2193b0);
+  color: #fff;
+  border-radius: 18px 18px 0 0;
+}
+
+.modal-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.modal-body {
+  font-size: 1.08rem;
+  color: #185a9d;
+  font-weight: 500;
+  background: #f7fbff;
+  border-radius: 0 0 18px 18px;
+}
+
+.modal-footer {
+  border-top: none;
+  background: #f7fbff;
+  border-radius: 0 0 18px 18px;
+}
+
+.btn-secondary {
+  border-radius: 50px;
+  font-weight: 500;
+  padding: 0.5rem 1.4rem;
+  font-size: 1rem;
+  background: #b6e0fe;
+  color: #185a9d;
+  border: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-secondary:hover {
+  background: #2193b0;
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .container {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    max-width: 100%;
+    padding: 0 8px;
+  }
+  h2 {
+    font-size: 1.3rem;
+    margin-bottom: 18px;
+  }
+  .card-body {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 0.8rem 0.7rem;
+  }
+  .message-preview {
+    max-width: 100%;
+    font-size: 1rem;
+  }
+}
