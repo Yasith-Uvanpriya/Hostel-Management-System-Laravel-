@@ -65,8 +65,24 @@
                     <div class="alert alert-success">{{ session('success') }}</div>
                 @endif
 
-                @if(isset($messages) && $messages->count() > 0)
-                    @foreach($messages as $message)
+                @php
+                    $adminMessages = $messages->where('type', 'admin')->where('is_read', false);
+                    $complaints = $messages->where('type', '!=', 'admin');
+                @endphp
+
+                @if($adminMessages->count() > 0)
+                    @foreach($adminMessages as $message)
+                        <div class="alert alert-info" role="alert">
+                            <h6 class="alert-heading">New Message from Admin</h6>
+                            <p>{{ Str::limit($message->message, 50) }}</p>
+                            <hr>
+                            <a href="{{ route('user.messages') }}" class="btn btn-sm btn-primary">View Message</a>
+                        </div>
+                    @endforeach
+                @endif
+
+                @if($complaints->count() > 0)
+                    @foreach($complaints as $message)
                         <div class="alert alert-{{ $message->status == 'Resolved' ? 'success' : 'warning' }}" role="alert">
                             <h6 class="alert-heading">Complaint #{{ $message->id }} - {{ ucfirst($message->type) }}</h6>
                             <p>{{ Str::limit($message->message, 50) }}</p>
