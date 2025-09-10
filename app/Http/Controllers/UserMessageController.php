@@ -11,10 +11,13 @@ class UserMessageController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $messages = Message::where('user_id', $user->id)->latest()->get();
+        $messages = Message::where('user_id', $user->id)->where('type', 'admin')->latest()->get();
 
-        // Mark all unread messages as read
-        Message::where('user_id', $user->id)->where('is_read', false)->update(['is_read' => true]);
+        // Mark all unread admin messages as read
+        Message::where('user_id', $user->id)
+               ->where('type', 'admin')
+               ->where('is_read', false)
+               ->update(['is_read' => true]);
 
         return view('UserMassege', compact('messages'));
     }
