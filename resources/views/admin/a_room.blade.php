@@ -13,6 +13,19 @@
         </div>
         <div class="container" style="margin-top: 20px; max-width: 800px;">
         <h1>Add Room</h1>
+        
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+        
         <form action="/aroom" method="POST">
             @csrf
             <div class="mb-3">
@@ -70,4 +83,38 @@
                 });
             });
         </script>
+        
+        <hr class="my-4">
+        
+        <div class="mt-5">
+            <h2>Existing Rooms</h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Hostel Name</th>
+                            <th>Room Number</th>
+                            <th>Bed Count</th>
+                            <th>Locker Count</th>
+                            <th>Created</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($rooms as $room)
+                            <tr>
+                                <td>{{ $room->hostel_name }}</td>
+                                <td>{{ $room->room_number }}</td>
+                                <td>{{ $room->number_of_beds }}</td>
+                                <td>{{ $room->locker_number }}</td>
+                                <td>{{ $room->created_at->format('Y-m-d H:i') }}</td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5" class="text-center">No rooms added yet.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
         

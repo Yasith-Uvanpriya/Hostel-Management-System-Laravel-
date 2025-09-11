@@ -22,7 +22,8 @@ Route::get('/S_interface', function(){
     return view('S_interface', compact('sProfile', 'user', 'messages'));
 });
 Route::get('/a_room', function(){
-return view('admin.a_room');
+    $rooms = \App\Models\Room::orderBy('created_at', 'desc')->get();
+    return view('admin.a_room', compact('rooms'));
 });
 
 Route::get('/room', [RoomController::class, 'add']);
