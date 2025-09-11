@@ -7,6 +7,52 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## How to Run This Project
+
+Follow these steps to set up and run the Hostel Management System locally:
+
+1. **Install Requirements:**
+	- PHP 8.1 or higher
+	- Composer
+	- Node.js & npm
+	- A database (e.g., MySQL)
+
+2. **Install PHP dependencies:**
+	```shell
+	composer install
+	```
+
+3. **Install and build frontend assets:**
+	```shell
+	npm install
+	npm run dev
+	```
+
+4. **Copy the example environment file and configure:**
+	```shell
+	cp .env.example .env
+	# Edit .env to set your database and other settings
+	```
+
+5. **Generate application key:**
+	```shell
+	php artisan key:generate
+	```
+
+6. **Run database migrations:**
+	```shell
+	php artisan migrate
+	```
+
+7. **Start the development server:**
+	```shell
+	php artisan serve
+	```
+
+The application will be available at http://localhost:8000
+
+---
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:

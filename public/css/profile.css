@@ -1,0 +1,56 @@
+/* Profile Page Enhanced Form Styles */
+.profile-form-container {
+  background: #fff;
+  border-radius: 28px;
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.13);
+  padding: 48px 36px;
+  max-width: 520px;
+  margin: 48px auto;
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+.profile-form-container:hover {
+  box-shadow: 0 16px 48px rgba(44, 62, 80, 0.18);
+  transform: translateY(-2px) scale(1.01);
+}
+.profile-form-title {
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: #185a9d;
+  margin-bottom: 32px;
+  letter-spacing: 1px;
+  text-align: center;
+}
+.profile-form .form-label {
+  font-weight: 600;
+  color: #2193b0;
+}
+.profile-form .form-control, .profile-form .form-select {
+  border-radius: 12px;
+  border: 1px solid #b2bec3;
+  font-size: 1.05rem;
+  padding: 0.7rem 1rem;
+  margin-bottom: 8px;
+  transition: border-color 0.2s;
+}
+.profile-form .form-control:focus, .profile-form .form-select:focus {
+  border-color: #2193b0;
+  box-shadow: 0 0 0 2px #6dd5ed33;
+}
+.profile-form .btn-primary {
+  background: linear-gradient(90deg, #2193b0, #6dd5ed);
+  border: none;
+  border-radius: 50px;
+  font-weight: 700;
+  padding: 0.7rem 2.2rem;
+  font-size: 1.1rem;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(33,147,176,0.13);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+  margin-top: 18px;
+}
+.profile-form .btn-primary:hover, .profile-form .btn-primary:focus {
+  background: linear-gradient(90deg, #6dd5ed, #2193b0);
+  box-shadow: 0 8px 24px rgba(33,147,176,0.18);
+  transform: translateY(-2px) scale(1.04);
+  outline: none;
+}
