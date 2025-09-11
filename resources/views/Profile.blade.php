@@ -5,53 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/profile.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container mt-5">
-        <div class="text-center" style="width: 400px; margin: 0 auto;">
-            <form method="POST" action="/update">
+
+    <div class="profile-form-bg min-vh-100 d-flex align-items-center" style="background: #f6f8fa;">
+    <div class="profile-form-container" style="width: 380px; min-width: 300px; min-height: 520px; padding: 32px 22px; box-shadow: 0 4px 16px rgba(44,62,80,0.08); border-radius: 18px; background: #fff;">
+            <div class="text-center mb-4">
+                <div class="profile-form-title" style="color: #185a9d; font-size: 1.6rem; font-weight: 700;">Edit Profile</div>
+                <small class="text-muted">Update your student information</small>
+            </div>
+            <form method="POST" action="/update" class="profile-form">
                 @csrf
-
-                <!-- Index No -->
                 <div class="mb-3">
-                    <label class="form-label" for="Index_no" >Index No</label>
-                    <input type="text" class="form-control" id="Index_no" name="Index_no" >
+                    <label class="form-label" for="Index_no" style="color:#185a9d;">Index No</label>
+                    <input type="text" class="form-control" id="Index_no" name="Index_no" style="background:#f8fafc;">
                 </div>
-                <!-- Name -->
                 <div class="mb-3">
-                    <label class="form-label" for="name">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" >
+                    <label class="form-label" for="name" style="color:#185a9d;">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" style="background:#f8fafc;">
                 </div>
-
-                <!-- Faculty -->
                 <div class="mb-3">
-                    <label class="form-label" for="Faculty">Faculty</label>
-                    <select class="form-select" name="Faculty" id="Faculty">
+                    <label class="form-label" for="Faculty" style="color:#185a9d;">Faculty</label>
+                    <select class="form-select" name="Faculty" id="Faculty" style="background:#f8fafc;">
                         <option selected disabled>-- Select Faculty --</option>
                         <option value="Computing">Computing</option>
                         <option value="Management">Management</option>
                         <option value="Applied Science">Applied Science</option>
                     </select>
                 </div>
-
-                <!-- Department -->
                 <div class="mb-3">
-                    <label class="form-label" for="Department">Department</label>
-                    <select class="form-select" name="Department" id="Department">
+                    <label class="form-label" for="Department" style="color:#185a9d;">Department</label>
+                    <select class="form-select" name="Department" id="Department" style="background:#f8fafc;">
                         <option selected disabled>-- Select Department --</option>
                     </select>
                 </div>
-
-                <!-- Address -->
                 <div class="mb-3">
-                    <label class="form-label" for="Address">Address</label>
-                    <input type="text" class="form-control" id="Address" name="Address"  >
+                    <label class="form-label" for="Address" style="color:#185a9d;">Address</label>
+                    <input type="text" class="form-control" id="Address" name="Address" style="background:#f8fafc;">
                 </div>
-
-                <!-- Blood Type -->
                 <div class="mb-3">
-                    <label class="form-label" for="Blood_Group">Blood Type</label>
-                    <select class="form-select" name="Blood_Group" id="Blood_Group">
+                    <label class="form-label" for="Blood_Group" style="color:#185a9d;">Blood Type</label>
+                    <select class="form-select" name="Blood_Group" id="Blood_Group" style="background:#f8fafc;">
                         <option selected disabled>-- Select Blood Type --</option>
                         <option value="A+">A+</option>
                         <option value="B+">B+</option>
@@ -59,19 +54,18 @@
                         <option value="AB+">AB+</option>
                     </select>
                 </div>
-
-                <!-- Medical Condition -->
                 <div class="mb-3">
-                    <label for="Medical_Condition" class="form-label">Medical Condition</label>
-                    <textarea class="form-control" id="Medical_Condition" name="Medical_Condition" rows="3"></textarea>
+                    <label for="Medical_Condition" class="form-label" style="color:#185a9d;">Medical Condition</label>
+                    <textarea class="form-control" id="Medical_Condition" name="Medical_Condition" rows="3" style="background:#f8fafc;"></textarea>
                 </div>
-
-                <!-- Telephone -->
-                <div class="mb-3">
-                    <label class="form-label" for="Telephone">Telephone</label>
-                    <input type="text" class="form-control" id="Telephone" name="Telephone" >
+                <div class="mb-4">
+                    <label class="form-label" for="Telephone" style="color:#185a9d;">Telephone</label>
+                    <input type="text" class="form-control" id="Telephone" name="Telephone" style="background:#f8fafc;">
                 </div>
-            </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg" style="background:#185a9d; border:none; border-radius:30px;">Save Changes</button>
+                </div>
+            </form>
         </div>
     </div>
 
