@@ -3,9 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Room Selection</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-     <link rel="stylesheet" href="{{ asset('css/room.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/room.css') }}">
+    <style>
+        /* Additional styles to fix dropdown visibility */
+        .form-select {
+            appearance: auto;
+            -webkit-appearance: auto;
+            -moz-appearance: auto;
+            background-color: #2193b0;
+            color: #fff;
+            cursor: pointer;
+        }
+        
+        .form-select option {
+            background-color: #ffffff;
+            color: #333333;
+            padding: 10px;
+        }
+        
+        /* Make dropdown options visible */
+        select option {
+            background-color: white;
+            color: #333;
+            padding: 10px;
+        }
+        
+        /* Add some spacing between select options */
+        .form-select option:not(:last-child) {
+            margin-bottom: 5px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        /* Improve form feedback text visibility */
+        .form-text {
+            color: #185a9d;
+            font-weight: 500;
+            margin-top: 5px;
+        }
+        
+        /* Improve alert styling */
+        .alert {
+            border-radius: 14px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
