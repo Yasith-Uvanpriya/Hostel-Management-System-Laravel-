@@ -52,22 +52,21 @@ form {
 }
 
 select,
-.dropdown-toggle,
-.dropdown-menu {
+.dropdown-toggle {
   min-width: 260px;
   width: 260px;
   max-width: 100%;
   border-radius: 14px !important;
   font-size: 1.08rem;
   padding: 0.85rem 1.2rem;
- background-color: #2193b0;
+  background-color: #2193b0;
   color: #fff !important;
   font-weight: 500;
   border: none;
   box-shadow: 0 2px 8px rgba(33,147,176,0.10);
   transition: background 0.2s, box-shadow 0.2s;
   margin-bottom: 6px;
-  appearance: none;
+  appearance: auto; /* Changed from none to auto to show dropdown arrow */
 }
 
 select:focus,
@@ -79,21 +78,56 @@ select:focus,
   outline: none;
 }
 
+/* Add specific styling for option elements */
+option {
+  background-color: #ffffff;
+  color: #333333;
+  font-weight: normal;
+  padding: 8px;
+}
+
 .dropdown-menu {
   border-radius: 14px;
   box-shadow: 0 4px 16px rgba(44, 62, 80, 0.10);
   font-size: 1.05rem;
+  background-color: #ffffff;
+  color: #333333;
 }
 
 .dropdown-item {
   padding: 0.85rem 1.2rem;
   transition: background 0.2s, color 0.2s;
   font-size: 1.05rem;
+  color: #333333;
 }
 
 .dropdown-item:hover, .dropdown-item:focus {
   background: #6dd5ed;
   color: #185a9d;
+}
+
+/* Add styling for the form-select class used in Bootstrap 5 */
+.form-select {
+  background-color: #2193b0;
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 0.85rem 1.2rem;
+  font-size: 1.08rem;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(33,147,176,0.10);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+}
+
+.form-select:focus {
+  background-color: #2193b0;
+  color: #fff;
+  border-color: #6dd5ed;
+  outline: none;
+  box-shadow: 0 8px 24px rgba(33,147,176,0.18);
 }
 
 input[type="hidden"] {
