@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
 </head>
 <body>
     <div class="container mt-5">
-        <div class="profile-form-container">
-            <div class="profile-form-title">Student Profile</div>
-            <form class="profile-form" method="POST" action="/update">
+        <div class="text-center" style="width: 400px; margin: 0 auto;">
+            <form method="POST" action="/update">
                 @csrf
 
                 <!-- Index No -->
@@ -73,24 +71,23 @@
                     <label class="form-label" for="Telephone">Telephone</label>
                     <input type="text" class="form-control" id="Telephone" name="Telephone" >
                 </div>
-
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+            </div>
         </div>
     </div>
 
     <!-- JS for dynamic department selection -->
     <script>
-        // Use IDs exactly as in the HTML (case-sensitive)
         const facultySelect = document.getElementById('Faculty');
         const departmentSelect = document.getElementById('Department');
 
-        // Guard in case elements are missing
         if (facultySelect && departmentSelect) {
             const departments = {
-                "Computing": ["Software Engineering", "Cyber Security", "Data Science"],
+                "Computing": ["Software Engineering", "Computing and Information System", "Data Science","Information Systems"],
                 "Management": ["Accounting", "Business Admin", "HR Management"],
-                "Applied Science": ["Biology", "Physics", "Chemistry"]
+                "Applied Science": ["Natural Resources", "Food Science", "Sports"],
+                "Agriculture": ["Agronomy", "Horticulture", "Animal Science"],
+                "Medicine": ["Nursing", "Pharmacy", "Public Health"],
+                "Social Science and Languages": ["Psychology", "Sociology", "English"]
             };
 
             facultySelect.addEventListener('change', function () {
@@ -107,6 +104,7 @@
                 }
             });
         }
+
     </script>
 </body>
 </html>
