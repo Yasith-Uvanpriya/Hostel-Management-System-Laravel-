@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
 
 body {
-  background: #e0eafc;
+  background: linear-gradient(120deg, #e0eafc 0%, #b6e0fe 100%);
   font-family: 'Roboto', Arial, sans-serif;
   min-height: 100vh;
+  color: #222;
+  letter-spacing: 0.02em;
+  transition: background 0.4s;
 }
 
 .container {
@@ -12,15 +15,15 @@ body {
 }
 
 h1.text-center {
-  font-size: 2.3rem;
+  font-size: 2.5rem;
   font-weight: 700;
   color: #185a9d;
   margin-bottom: 36px;
   letter-spacing: 1.5px;
-  background: none;
-  -webkit-background-clip: initial;
-  -webkit-text-fill-color: initial;
-  background-clip: initial;
+  background: linear-gradient(90deg, #2193b0, #6dd5ed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .d-flex[style] {
@@ -59,7 +62,7 @@ h1.text-center {
   font-weight: 600;
   padding: 0.7rem 2.2rem;
   font-size: 1.1rem;
-  color: #fff;
+  background: linear-gradient(90deg, #2193b0, #6dd5ed);
   box-shadow: 0 2px 8px rgba(33,147,176,0.13);
   transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
 }
@@ -71,7 +74,7 @@ h1.text-center {
 }
 
 .alert {
-  border-radius: 14px;
+  background: linear-gradient(90deg, #6dd5ed, #2193b0);
   box-shadow: 0 2px 8px rgba(44, 62, 80, 0.10);
   font-size: 1rem;
   margin-bottom: 20px;

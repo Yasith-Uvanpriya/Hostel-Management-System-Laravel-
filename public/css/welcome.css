@@ -2,23 +2,34 @@
 
 .hms-container {
   min-height: 100vh;
-  background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+  background: url('../images/susl_bg.jpg') center center/cover no-repeat fixed;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.hms-container::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(120deg, #e0eafc99 0%, #cfdef399 100%);
+  z-index: 1;
+}
+
 .hms-mainbox {
-  background: #fff;
-  border-radius: 32px;
-  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.10);
+  background: rgba(255,255,255,0.95);
+  border-radius: 40px;
+  box-shadow: 0 16px 48px rgba(44, 62, 80, 0.13);
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 56px 48px;
-  max-width: 1200px;
+  padding: 64px 56px;
+  max-width: 1240px;
   width: 100%;
-  gap: 48px;
+  gap: 56px;
+  position: relative;
+  z-index: 2;
 }
 
 .hms-imagebox {
@@ -45,16 +56,35 @@
   align-items: flex-start;
 }
 
+
 .hms-title {
-  font-size: 2.7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 2.2rem;
+}
+
+.hms-title-main {
+  font-size: 2.5rem;
   font-weight: 700;
-  margin-bottom: 1.2rem;
   letter-spacing: 1px;
   background: linear-gradient(90deg, #2193b0, #6dd5ed);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+  line-height: 1.1;
+}
+
+.hms-title-sub {
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: #2193b0;
+  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+  margin-top: 0.3rem;
+  letter-spacing: 0.5px;
 }
 
 .hms-description {

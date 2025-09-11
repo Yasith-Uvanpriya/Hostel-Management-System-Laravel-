@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
 </head>
 <body>
     <div class="container mt-5">
-        <div class="text-center" style="width: 400px; margin: 0 auto;">
-            <form method="POST" action="/update">
+        <div class="profile-form-container">
+            <div class="profile-form-title">Student Profile</div>
+            <form class="profile-form" method="POST" action="/update">
                 @csrf
 
                 <!-- Index No -->

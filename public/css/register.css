@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
 
 body {
-  background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+  background: linear-gradient(120deg, #e0eafc 0%, #b6e0fe 100%);
   min-height: 100vh;
   font-family: 'Roboto', Arial, sans-serif;
   display: flex;
@@ -11,34 +11,13 @@ body {
 
 .register-container {
   background: #fff;
-  border-radius: 24px;
-  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.10);
-  padding: 48px 32px;
-  max-width: 420px;
+  border-radius: 32px;
+  box-shadow: 0 12px 40px rgba(44, 62, 80, 0.13);
+  padding: 56px 40px;
+  max-width: 440px;
   width: 100%;
-  margin: 48px auto;
-}
-
-.register-title {
-  font-size: 2rem;
-  font-weight: 500;
-  color: #2193b0;
-  margin-bottom: 32px;
-  letter-spacing: 1px;
-}
-
-.form-label {
-  font-weight: 500;
-  color: #185a9d;
-}
-
-.form-control {
-  border-radius: 12px;
-  border: 1px solid #b2bec3;
-  font-size: 1rem;
-  padding: 0.7rem 1rem;
-  margin-bottom: 8px;
-  transition: border-color 0.2s;
+  margin: 56px auto;
+  transition: box-shadow 0.3s, transform 0.2s;
 }
 
 .form-control:focus {
@@ -50,6 +29,11 @@ body {
   background: linear-gradient(90deg, #6dd5ed, #2193b0);
   border: none;
   border-radius: 50px;
+  .btn-primary:hover, .btn-primary:focus {
+    background: linear-gradient(90deg, #6dd5ed, #2193b0);
+    box-shadow: 0 8px 24px rgba(33,147,176,0.18);
+    transform: translateY(-2px) scale(1.04);
+    outline: none;
   font-weight: 600;
   padding: 0.7rem 2rem;
   font-size: 1.1rem;
