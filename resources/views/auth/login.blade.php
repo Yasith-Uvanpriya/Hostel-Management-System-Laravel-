@@ -28,7 +28,7 @@
                     <input type="password" name="password" id="password" placeholder="Password" class="form-control" required>
                 </div>
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-primary">Login</button>
+                    <button type="submit" class="btn btn-primary"><span>Login</span></button>
                 </div>
             </form>
             <div class="mt-4 text-center">
