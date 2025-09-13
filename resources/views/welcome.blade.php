@@ -28,10 +28,10 @@
           <strong>Address:</strong> Sabaragamuwa University of Sri Lanka, P.O. Box 02, Belihuloya, 70140, Sri Lanka<br>
           <strong>Contact:</strong> +94-45-2280014 / +94-45-2280087 | <a href="mailto:info@sab.ac.lk">info@sab.ac.lk</a>
         </p>
-        <div class="hms-btnrow" style="display: flex; gap: 18px; justify-content: center;">
-          <a href="{{ url('/register') }}" class="btn btn-primary hms-btn" style="min-width: 130px;">Register</a>
-          <a href="{{ url('/login') }}" class="btn btn-secondary hms-btn" style="min-width: 130px;">Login</a>
-          <a href="{{ url('/admin/login') }}" class="btn btn-danger hms-btn" style="min-width: 130px;">Admin Login</a>
+        <div class="hms-btnrow">
+          <a href="{{ url('/register') }}" class="hms-btn">Register</a>
+          <a href="{{ url('/login') }}" class="hms-btn">Login</a>
+          <a href="{{ url('/admin/login') }}" class="hms-btn">Admin Login</a>
         </div>
       </div>
     </div>
