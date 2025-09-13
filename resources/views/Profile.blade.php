@@ -32,6 +32,9 @@
                         <option value="Computing">Computing</option>
                         <option value="Management">Management</option>
                         <option value="Applied Science">Applied Science</option>
+                        <option value="Agriculture">Agriculture</option>
+                        <option value="Medicine">Medicine</option>
+                        <option value="Social Science and Languages">Social Science and Languages</option>
                     </select>
                 </div>
                 <div class="mb-3">
@@ -63,7 +66,7 @@
                     <input type="text" class="form-control" id="Telephone" name="Telephone" style="background:#f8fafc;">
                 </div>
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-primary btn-lg" style="background:#185a9d; border:none; border-radius:30px;">Save Changes</button>
+                    <button type="submit" class="btn btn-primary btn-lg">Save Changes</button>
                 </div>
             </form>
         </div>

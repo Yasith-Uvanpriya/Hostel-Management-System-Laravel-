@@ -36,6 +36,12 @@
   border-color: #2193b0;
   box-shadow: 0 0 0 2px #6dd5ed33;
 }
+.profile-form .form-control:focus, 
+.profile-form .form-select:focus {
+  border-color: #2193b0;
+  box-shadow: 0 0 8px rgba(33,147,176,0.25);
+  background-color: #f0fcff; 
+}
 .profile-form .btn-primary {
   background: linear-gradient(90deg, #2193b0, #6dd5ed);
   border: none;
@@ -48,9 +54,23 @@
   transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
   margin-top: 18px;
 }
-.profile-form .btn-primary:hover, .profile-form .btn-primary:focus {
-  background: linear-gradient(90deg, #6dd5ed, #2193b0);
-  box-shadow: 0 8px 24px rgba(33,147,176,0.18);
-  transform: translateY(-2px) scale(1.04);
-  outline: none;
+
+.profile-form .btn-primary:hover {
+  background: linear-gradient(90deg, #0d3b66, #1a73e8); 
+  color: #fff;
+  box-shadow: 0 10px 28px rgba(13,59,102,0.25);
+  transform: translateY(-3px) scale(1.05);
+}
+@media (max-width: 576px) {
+  .profile-form-container {
+    padding: 24px 18px;
+    border-radius: 16px;
+  }
+  .profile-form-title {
+    font-size: 1.6rem;
+  }
+  .profile-form .btn-primary {
+    font-size: 1rem;
+    padding: 0.6rem 1.8rem;
+  }
 }
