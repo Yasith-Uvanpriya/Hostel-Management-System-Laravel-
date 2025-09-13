@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/interface.css') }}">
 </head>
+
 <body>
     <div class="container">
         <h1 class="text-center"> Wellcome {{ Auth::user()->name }}</h1>
@@ -60,7 +62,7 @@
             </div>
 
             <!-- Notification Alert -->
-            <div style="width: 300px; max-height: 70vh; overflow-y: auto;">
+            <div class="alerts-wrapper" style="width: 300px; max-height: 70vh; overflow-y: auto;">
                 @if(session('success'))
                     <div class="alert alert-success">{{ session('success') }}</div>
                 @endif
@@ -110,26 +112,39 @@
         <!-- Complaint Boxes Section -->
         <div class="row mt-5 g-4">
             <div class="col-md-3 col-6">
-                <a href="{{ route('user.complaints.create', 'water') }}" class="complaint-box water d-flex align-items-center justify-content-center text-decoration-none">
+                <a href="{{ route('user.complaints.create', 'water') }}"
+                    class="complaint-box water d-flex align-items-center justify-content-center text-decoration-none">
                     <h5 class="text-white text-center">Water Complaints</h5>
                 </a>
             </div>
             <div class="col-md-3 col-6">
-                <a href="{{ route('user.complaints.create', 'electricity') }}" class="complaint-box electricity d-flex align-items-center justify-content-center text-decoration-none">
+                <a href="{{ route('user.complaints.create', 'electricity') }}"
+                    class="complaint-box electricity d-flex align-items-center justify-content-center text-decoration-none">
                     <h5 class="text-white text-center">Electricity Complaints</h5>
                 </a>
             </div>
             <div class="col-md-3 col-6">
-                <a href="{{ route('user.complaints.create', 'cleaning') }}" class="complaint-box cleaning d-flex align-items-center justify-content-center text-decoration-none">
+                <a href="{{ route('user.complaints.create', 'cleaning') }}"
+                    class="complaint-box cleaning d-flex align-items-center justify-content-center text-decoration-none">
                     <h5 class="text-white text-center">Cleaning Complaints</h5>
                 </a>
             </div>
             <div class="col-md-3 col-6">
-                <a href="{{ route('user.complaints.create', 'room') }}" class="complaint-box room d-flex align-items-center justify-content-center text-decoration-none">
+                <a href="{{ route('user.complaints.create', 'room') }}"
+                    class="complaint-box room d-flex align-items-center justify-content-center text-decoration-none">
                     <h5 class="text-white text-center">Room Complaints</h5>
                 </a>
             </div>
         </div>
+        <!-- Footer -->
+        <footer class="footer mt-5 py-3 text-center">
+            <hr />
+            <p class="mb-0">&copy; {{ date('Y') }} Sabaragamuwa University Hostel Management System</p>
+            <small> A project designed & developed by 21/22 CIS Group, Sabaragamuwa
+                University</small>
+        </footer>
+
     </div>
 </body>
+
 </html>
