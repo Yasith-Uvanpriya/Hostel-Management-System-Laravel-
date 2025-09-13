@@ -38,7 +38,7 @@
                 @enderror
             </div>
 
-            <button type="submit" class="btn btn-primary w-100">Register</button>
+            <button type="submit" class="btn btn-primary w-100"><span>Register</span></button>
         </form>
     </div>
 </body>
