@@ -47,7 +47,7 @@
                 <h5 class="mb-0"><i class="fa-solid fa-clipboard-list"></i> Complaint #{{ $message->id }}</h5>
               </div>
               <div class="card-body">
-                <p><strong>Complaint IDs:</strong> #{{ $message->id }}</p>
+                <p><strong>Complaint ID:</strong> #{{ $message->id }}</p>
                 <p><strong>Complaint Type:</strong> {{ ucfirst($message->type) }}</p>
                 <p><strong>Date Filed:</strong> {{ $message->created_at->format('Y-m-d') }}</p>
                 <p><strong>Hostel:</strong> {{ $message->user->room->hostel_name ?? 'N/A' }}</p>
