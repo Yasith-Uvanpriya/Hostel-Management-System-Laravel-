@@ -29,7 +29,7 @@
                     <label class="form-label" for="Faculty" style="color:#185a9d;">Faculty</label>
                     <select class="form-select" name="Faculty" id="Faculty" style="background:#f8fafc;">
                         <option selected disabled>-- Select Faculty --</option>
-                        <option value="Computing">COMPUTING</option>
+                        <option value="Computing">Computing</option>
                         <option value="Management">Management</option>
                         <option value="Applied Science">Applied Science</option>
                         <option value="Agriculture">Agriculture</option>
