@@ -30,7 +30,8 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 # --------------------------
 # 4️⃣ Copy composer files first (for caching)
 # --------------------------
-COPY composer.json composer.lock /var/www/html/
+# Copy composer files - lock file is optional
+COPY composer.json composer.loc[k] /var/www/html/
 
 # --------------------------
 # 5️⃣ Handle environment file (.env)
