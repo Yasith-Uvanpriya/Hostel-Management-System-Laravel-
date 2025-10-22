@@ -82,8 +82,8 @@ pipeline {
             steps {
                 script {
                     echo "Building Docker image..."
-                    dockerImage = docker.build("${appRegistry}:${BUILD_NUMBER}", "./Docker-files")
-                }
+                    dockerImage = docker.build("${appRegistry}:${BUILD_NUMBER}", "-f Docker-files/Dockerfile .") 
+                    }
             }
         }
 
