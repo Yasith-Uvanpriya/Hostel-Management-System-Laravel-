@@ -19,7 +19,8 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     libzip-dev \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip \
-    && a2enmod rewrite
+    && a2enmod rewrite \
+    && rm -rf /var/lib/apt/lists/*
 
 # --------------------------
 # 3️⃣ Copy Composer from official image
@@ -27,14 +28,13 @@ RUN apt-get update && apt-get install -y \
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 # --------------------------
-# 4️⃣ Copy project files
+# 4️⃣ Copy composer files first (for caching)
 # --------------------------
-COPY . /var/www/html
+COPY composer.json composer.lock /var/www/html/
 
 # --------------------------
 # 5️⃣ Handle environment file (.env)
 # --------------------------
-# If .env.example exists → copy it, else create a default .env file
 RUN if [ -f .env.example ]; then \
       cp .env.example .env; \
     else \
@@ -57,7 +57,12 @@ RUN if [ -f .env.example ]; then \
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
 # --------------------------
-# 7️⃣ Generate app key and clear caches
+# 7️⃣ Copy the rest of the project
+# --------------------------
+COPY . /var/www/html
+
+# --------------------------
+# 8️⃣ Generate app key and clear caches
 # --------------------------
 RUN php artisan key:generate || true && \
     php artisan config:clear && \
@@ -65,13 +70,13 @@ RUN php artisan key:generate || true && \
     php artisan route:clear
 
 # --------------------------
-# 8️⃣ Fix permissions for Laravel storage & cache
+# 9️⃣ Fix permissions for Laravel storage & cache
 # --------------------------
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 # --------------------------
-# 9️⃣ Expose port and start Apache
+# 🔟 Expose port and start Apache
 # --------------------------
 EXPOSE 80
 CMD ["apache2-foreground"]
