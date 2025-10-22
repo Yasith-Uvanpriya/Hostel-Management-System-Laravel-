@@ -6,6 +6,8 @@ pipeline {
         appRegistry = "032707422991.dkr.ecr.us-east-1.amazonaws.com/hostelmanagement"
         vprofileRegistry = "https://032707422991.dkr.ecr.us-east-1.amazonaws.com"
         BUILD_TIMESTAMP = "${new Date().format('yyyyMMdd_HHmmss')}"
+        cluster = "Hostel_Management"
+        service = "Hostel_management_task-service"
     }
 
     stages {
