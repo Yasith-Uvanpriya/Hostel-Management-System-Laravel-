@@ -1,39 +1,28 @@
-version: '3.8'
+version: '3.9'
 
 services:
+  # --------------------------
+  # Laravel Application Service
+  # --------------------------
   app:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ..
+      dockerfile: ./Dockerfile
     container_name: hostel_app
+    restart: always
+    env_file:
+      - ../.env
     volumes:
-      - .:/var/www/html
-    networks:
-      - laravel
-    environment:
-      - APP_ENV=local
-      - APP_DEBUG=true
-      - APP_KEY=
-      - DB_HOST=db
-      - DB_PORT=3306
-      - DB_DATABASE=hostel_db
-      - DB_USERNAME=root
-      - DB_PASSWORD=root
-
-  web:
-    image: nginx:1.25
-    container_name: hostel_nginx
-    ports:
-      - "8080:80"
-    volumes:
-      - .:/var/www/html
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ../:/var/www/html
     depends_on:
-      - app
+      - mysql
     networks:
-      - laravel
+      - hostel_network
 
-  db:
+  # --------------------------
+  # MySQL Database
+  # --------------------------
+  mysql:
     image: mysql:8.0
     container_name: hostel_db
     restart: always
@@ -42,15 +31,35 @@ services:
       MYSQL_DATABASE: hostel_db
       MYSQL_USER: root
       MYSQL_PASSWORD: root
-    ports:
-      - "3307:3306"
     volumes:
-      - db_data:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
     networks:
-      - laravel
+      - hostel_network
 
+  # --------------------------
+  # Nginx Web Server
+  # --------------------------
+  nginx:
+    image: nginx:latest
+    container_name: hostel_nginx
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - ../:/var/www/html
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+    networks:
+      - hostel_network
+
+# --------------------------
+# Networks & Volumes
+# --------------------------
 networks:
-  laravel:
+  hostel_network:
 
 volumes:
-  db_data:
+  mysql_data:
