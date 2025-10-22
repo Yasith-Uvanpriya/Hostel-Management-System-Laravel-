@@ -1,5 +1,5 @@
 # --------------------------
-# 1️⃣ Base image
+# 1️⃣ Base Image
 # --------------------------
 FROM php:8.3-apache
 
@@ -7,7 +7,7 @@ FROM php:8.3-apache
 WORKDIR /var/www/html
 
 # --------------------------
-# 2️⃣ Install required system packages and PHP extensions
+# 2️⃣ Install required system packages & PHP extensions
 # --------------------------
 RUN apt-get update && apt-get install -y \
     git \
@@ -30,11 +30,18 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 # --------------------------
 # 4️⃣ Copy composer files first (for caching)
 # --------------------------
-# Copy composer files - lock file is optional
-COPY composer.json composer.loc[k] /var/www/html/
+COPY composer.json composer.lock* ./
+
+# Install PHP dependencies (no dev packages)
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader || true
 
 # --------------------------
-# 5️⃣ Handle environment file (.env)
+# 5️⃣ Copy full Laravel application
+# --------------------------
+COPY . /var/www/html
+
+# --------------------------
+# 6️⃣ Handle environment file (.env)
 # --------------------------
 RUN if [ -f .env.example ]; then \
       cp .env.example .env; \
@@ -53,17 +60,7 @@ RUN if [ -f .env.example ]; then \
     fi
 
 # --------------------------
-# 6️⃣ Install PHP dependencies via Composer
-# --------------------------
-RUN composer install --no-interaction --prefer-dist --optimize-autoloader
-
-# --------------------------
-# 7️⃣ Copy the rest of the project
-# --------------------------
-COPY . /var/www/html
-
-# --------------------------
-# 8️⃣ Generate app key and clear caches
+# 7️⃣ Generate Laravel app key & clear caches
 # --------------------------
 RUN php artisan key:generate || true && \
     php artisan config:clear && \
@@ -71,13 +68,13 @@ RUN php artisan key:generate || true && \
     php artisan route:clear
 
 # --------------------------
-# 9️⃣ Fix permissions for Laravel storage & cache
+# 8️⃣ Fix permissions for Laravel storage & cache
 # --------------------------
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chown -R www-data:www-data /var/www/html && \
+    chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 # --------------------------
-# 🔟 Expose port and start Apache
+# 9️⃣ Expose port and start Apache
 # --------------------------
 EXPOSE 80
 CMD ["apache2-foreground"]
