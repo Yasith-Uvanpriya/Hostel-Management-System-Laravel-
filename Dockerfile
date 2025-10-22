@@ -33,7 +33,7 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 COPY composer.json composer.lock* ./
 
 # Install PHP dependencies (no dev packages)
-RUN composer install --no-interaction --prefer-dist --optimize-autoloader || true
+RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader || true
 
 # --------------------------
 # 5️⃣ Copy full Laravel application
@@ -51,21 +51,13 @@ RUN if [ -f .env.example ]; then \
       echo "APP_KEY=" >> .env && \
       echo "APP_DEBUG=true" >> .env && \
       echo "APP_URL=http://localhost" >> .env && \
-      echo "DB_CONNECTION=mysql" >> .env && \
-      echo "DB_HOST=mysql" >> .env && \
-      echo "DB_PORT=3306" >> .env && \
-      echo "DB_DATABASE=hostel_db" >> .env && \
-      echo "DB_USERNAME=root" >> .env && \
-      echo "DB_PASSWORD=root" >> .env; \
+      echo "DB_CONNECTION=sqlite" >> .env; \
     fi
 
 # --------------------------
-# 7️⃣ Generate Laravel app key & clear caches
+# 7️⃣ Generate Laravel app key (skip DB actions)
 # --------------------------
-RUN php artisan key:generate || true && \
-    php artisan config:clear && \
-    php artisan cache:clear && \
-    php artisan route:clear
+RUN php artisan key:generate || true
 
 # --------------------------
 # 8️⃣ Fix permissions for Laravel storage & cache
