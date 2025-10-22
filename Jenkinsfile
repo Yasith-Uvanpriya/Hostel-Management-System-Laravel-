@@ -82,13 +82,9 @@ pipeline {
             steps {
                 script {
                     echo "Building Docker image..."
-                    // Build from project root, not from Docker-files/
-                    dockerImage = docker.build(
-                    "${appRegistry}:${BUILD_NUMBER}", 
-                    "-f Docker-files/Dockerfile ."  // ← The dot means "current directory"
-                    )
-                }
-             }
+                    dockerImage = docker.build("${appRegistry}:${BUILD_NUMBER}", ".")
+                 }
+            }
         }
 
         stage('Push Docker Image to ECR') {
