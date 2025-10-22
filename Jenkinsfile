@@ -78,16 +78,17 @@ pipeline {
             }
         }
 
-           stage('Build Docker Image') {
-                steps {
-                    script {
-                        echo "Building Docker image..."
-                        // Use project root as context, reference Dockerfile explicitly
-                        dockerImage = docker.build(
-                        "${appRegistry}:${BUILD_NUMBER}", 
-                        "-f Docker-files/Dockerfile .")
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    echo "Building Docker image..."
+                    // Build from project root, not from Docker-files/
+                    dockerImage = docker.build(
+                    "${appRegistry}:${BUILD_NUMBER}", 
+                    "-f Docker-files/Dockerfile ."  // ← The dot means "current directory"
+                    )
                 }
-            }
+             }
         }
 
         stage('Push Docker Image to ECR') {
