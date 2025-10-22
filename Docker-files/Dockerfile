@@ -1,28 +1,45 @@
-# Use PHP 8.2 FPM as the base image
-FROM php:8.2-fpm
+# Use official PHP 8.3 with Apache as base image
+FROM php:8.3-apache
 
-# Set working directory
+# Set working directory inside container
 WORKDIR /var/www/html
 
-# Install system dependencies
+# Install required system packages and PHP extensions for Laravel
 RUN apt-get update && apt-get install -y \
-    git curl zip unzip libpng-dev libjpeg-dev libfreetype6-dev libonig-dev libxml2-dev \
-    && docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd
+    git \
+    unzip \
+    zip \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    libzip-dev \
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 
-# Install Composer
-COPY --from=composer:2.7 /usr/bin/composer /usr/bin/composer
+# Enable Apache mod_rewrite (for Laravel routing)
+RUN a2enmod rewrite
 
-# Copy application code
-COPY . .
+# Copy composer from official image to save install time
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Install Laravel dependencies
-RUN composer install --no-dev --optimize-autoloader
+# Copy project files into container
+COPY . /var/www/html
 
-# Set permissions for Laravel storage and bootstrap
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+# Set proper permissions for Laravel
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Expose PHP-FPM port
-EXPOSE 9000
+# Install dependencies
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
-# Start PHP-FPM
-CMD ["php-fpm"]
+# Copy environment file if available
+COPY .env.example .env
+
+# Generate Laravel app key
+RUN php artisan key:generate
+
+# Expose port 80 for Apache
+EXPOSE 80
+
+# Start Apache in the foreground
+CMD ["apache2-foreground"]
