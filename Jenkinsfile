@@ -13,7 +13,7 @@ pipeline {
         stage('Fetch Code') {
             steps {
                 echo "Fetching code from GitHub..."
-                git branch: 'main', url: 'https://github.com/Bhanuka10/Hostel-Management-System-Laravel-.git'
+                git branch: 'main', url: 'https://github.com/Yasith-Uvanpriya/Hostel-Management-System-Laravel-.git'
             }
         }
 
