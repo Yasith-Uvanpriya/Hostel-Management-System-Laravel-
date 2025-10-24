@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
   schedule:
-    - cron: "10 14 * * *"  # Runs daily at 14:10 UTC
+    - cron: "10 14 * * 1-5"  # At 14:10 on every day-of-week from Monday through Friday
 
 env:
   ECR_REPOSITORY: 'hostel_managemnt'
