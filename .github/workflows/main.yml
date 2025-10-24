@@ -90,7 +90,7 @@ jobs:
   BUILD_AND_PUBLISH:
     name: Build and Push Docker Image
     runs-on: ubuntu-latest
-    environment: production
+    environment: Hostel-management
     needs: [Build, Security_Scan]
     if: github.ref == 'refs/heads/main'
     steps:
