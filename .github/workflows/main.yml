@@ -1,29 +1,48 @@
-name: Build Job
-on: 
+name: CI Pipeline
+
+on:
   push:
-    branches: 
+    branches:
+      - main
+  pull_request:
+    branches:
       - main
 
 jobs:
-  Build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Code checkout
-        uses: actions/checkout@v4
-
-      - name: Maven Build
-        run: mvn install
-
-
+  # 🧪 1️⃣ Run Tests First
   Testing:
+    name: Run Unit Tests
     runs-on: ubuntu-latest
-    needs: Build
     steps:
-      - name: Code checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run tests on main branch
-        run: mvn test
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
-      - name: Checkstyle
-        run: mvn checkstyle:checkstyle
+      - name: Run Tests
+        run: mvn test --batch-mode
+
+      - name: Checkstyle Analysis
+        run: mvn checkstyle:checkstyle --batch-mode
+
+  # 🏗️ 2️⃣ Build Job (runs only if tests pass)
+  Build:
+    name: Build Project
+    runs-on: ubuntu-latest
+    needs: Testing
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Build with Maven
+        run: mvn clean install --batch-mode
