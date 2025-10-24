@@ -15,7 +15,7 @@ on:
     - cron: "10 14 * * 1-5"   # Runs at 2:10 PM, Monday to Friday
 
 env:
-  ECR_REPOSITORY: 'hostel_management'
+  ECR_REPOSITORY: 'hostel_managemnt'
   
 permissions: 
   contents: read
