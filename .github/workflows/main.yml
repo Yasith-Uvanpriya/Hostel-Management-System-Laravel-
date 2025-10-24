@@ -1,21 +1,33 @@
-name: Laravel CI Pipeline
+name: Hostel Management CI/CD Workflow
 
-on:
+on: 
   push:
-    branches:
+    branches: 
       - main
+
   pull_request:
-    branches:
+    branches: 
       - main
+
+  workflow_dispatch:
+
+  schedule:
+    - cron: "10 14 * * 1-5"   # Runs at 2:10 PM, Monday to Friday
+
+env:
+  ECR_REPOSITORY: 'hostel_management'
+  
+permissions: 
+  contents: read
 
 jobs:
-  test:
-    name: Run Laravel Tests
+  Build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
@@ -24,21 +36,87 @@ jobs:
           extensions: mbstring, bcmath, xml, mysql, zip, gd
           coverage: none
 
-      - name: Check PHP Version
-        run: php -v
-
-      - name: Install Composer Dependencies
-        run: composer install --no-interaction --prefer-dist --optimize-autoloader
-
-      - name: Set up environment file
+      - name: Install Dependencies
         run: |
+          composer install --no-interaction --prefer-dist --optimize-autoloader
           cp .env.example .env || true
           php artisan key:generate
 
       - name: Run Laravel Tests
         run: php artisan test
 
-      - name: Run Code Style Check (PHP_CodeSniffer)
+      - name: Run Code Style Check
         run: |
           composer global require "squizlabs/php_codesniffer=*"
           ~/.composer/vendor/bin/phpcs --standard=PSR12 app/ || true
+
+      - name: Upload Laravel Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: laravel-app
+          path: ./
+
+      - name: Notify if Build Fails
+        if: failure()
+        run: echo "🚨 Build job failed! Please check logs."
+
+
+  Security_Scan:
+    runs-on: ubuntu-latest
+    needs: Build
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Run Trivy Filesystem Scan
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: fs
+          scan-ref: .
+          format: json
+          exit-code: 0
+          vuln-type: os,library
+          output: trivy-results.json
+
+      - name: Upload Trivy Scan Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy-scan-results
+          path: trivy-results.json
+
+
+  BUILD_AND_PUBLISH:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+    environment: production
+    needs: [Build, Security_Scan]
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr 
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build, Tag, and Push Docker Image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+      
